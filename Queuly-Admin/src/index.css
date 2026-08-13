@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+/* ======================================================
+   REDWOOD CAFE ADMIN — SHARED DESIGN TOKENS
+   Single source of truth for both pages.
+====================================================== */
+:root {
+  /* ── Backgrounds ── */
+  --bg-main:   #f8f6f2;
+  --bg-card:   #ffffff;
+  --bg-topbar: #ffffff;
+
+  /* ── Typography ── */
+  --text-primary:   #2c1f14;
+  --text-secondary: #7b6c5f;
+  --text-muted:     #a3968b;
+
+  /* ── Borders ── */
+  --border-light: #ece5dd;
+
+  /* ── Fonts ── */
+  --font-sans:  'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+
+  /* ── Brand accent ── */
+  --accent:       #5c3a21;
+  --accent-hover: #3e2b18;
+
+  /* ── Status palette — used in BOTH dashboard columns & stat icons ── */
+  --col-scheduled:         #c27d2a;
+  --col-scheduled-bg:      #fff9f0;
+  --col-scheduled-icon-bg: #fdf0dc;
+
+  --col-inbox:         #3b7fc4;
+  --col-inbox-bg:      #f0f6ff;
+  --col-inbox-icon-bg: #dceeff;
+
+  --col-preparing:         #d4880a;
+  --col-preparing-bg:      #fffbf0;
+  --col-preparing-icon-bg: #fef3d0;
+
+  --col-ready:         #4a9c5d;
+  --col-ready-bg:      #f2fbf4;
+  --col-ready-icon-bg: #d4f0dc;
+
+  --col-completed:         #6d5f9e;
+  --col-completed-bg:      #f6f3ff;
+  --col-completed-icon-bg: #e6e0f8;
+
+  /* ── History-specific stat icons (warm amber theme) ── */
+  --col-hist-orders-icon-bg: #fdf0dc;
+  --col-hist-orders-color:   #c27d2a;
+
+  --col-hist-revenue-icon-bg: #fef3d0;
+  --col-hist-revenue-color:   #d4880a;
+
+  --col-hist-items-icon-bg: #d4f0dc;
+  --col-hist-items-color:   #4a9c5d;
+
+  --col-hist-avg-icon-bg: #e6e0f8;
+  --col-hist-avg-color:   #6d5f9e;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar (global) ── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #ccc4bb; }

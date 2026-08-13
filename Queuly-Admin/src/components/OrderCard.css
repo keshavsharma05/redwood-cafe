@@ -1,0 +1,218 @@
+/* =====================
+   ORDER CARD — matches reference design
+===================== */
+
+.order-card-ui {
+  background: #ffffff;
+  border: 1px solid #ece5dd;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: box-shadow 0.18s;
+}
+
+.order-card-ui:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Header row: order ID + time */
+.card-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.id-tag {
+  font-size: 11px;
+  font-weight: 600;
+  color: #a3968b;
+  letter-spacing: 0.03em;
+}
+
+.time-tag {
+  font-size: 10px;
+  color: #a3968b;
+}
+
+/* Customer row */
+.card-customer {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cust-icon {
+  color: #a3968b;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+
+.cust-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.cust-name {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c1f14;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cust-phone {
+  margin: 1px 0 0 0;
+  font-size: 10px;
+  color: #a3968b;
+}
+
+/* Items list */
+.card-items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.card-item-row {
+  display: flex;
+  align-items: center;
+  font-size: 11.5px;
+  color: #7b6c5f;
+}
+
+.item-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 4px;
+}
+
+.item-qty {
+  font-size: 11px;
+  color: #a3968b;
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 0 6px;
+}
+
+.item-price {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #2c1f14;
+  flex-shrink: 0;
+  white-space: nowrap;
+  min-width: 36px;
+  text-align: right;
+}
+
+/* Total row */
+.card-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #ece5dd;
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #2c1f14;
+}
+
+/* Action area */
+.card-actions-area {
+  display: flex;
+  justify-content: center;
+}
+
+/* Move button */
+.move-btn {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  background: transparent;
+  transition: all 0.18s;
+  font-family: 'Inter', sans-serif;
+}
+
+.move-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Status-specific button colors */
+.status-scheduled .move-btn {
+  border: 1px solid #c27d2a;
+  color: #c27d2a;
+}
+.status-scheduled .move-btn:hover:not(:disabled) {
+  background: #fff3e3;
+}
+
+.status-inbox .move-btn {
+  border: 1px solid #3b7fc4;
+  color: #3b7fc4;
+}
+.status-inbox .move-btn:hover:not(:disabled) {
+  background: #ebf4ff;
+}
+
+.status-preparing .move-btn {
+  border: 1px solid #d4880a;
+  color: #d4880a;
+}
+.status-preparing .move-btn:hover:not(:disabled) {
+  background: #fff8e6;
+}
+
+.status-ready .move-btn {
+  border: 1px solid #4a9c5d;
+  color: #4a9c5d;
+}
+.status-ready .move-btn:hover:not(:disabled) {
+  background: #edf8f0;
+}
+
+/* Completed badge (no button) */
+.completed-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 11px;
+  color: #a3968b;
+}
+
+.completed-badge-left {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #6d5f9e;
+  font-weight: 600;
+}
+
+@keyframes urgentGlow {
+  0% { box-shadow: 0 0 0px rgba(234, 88, 12, 0), inset 0 0 0px rgba(234, 88, 12, 0); border-color: rgba(234, 88, 12, 0.4); }
+  50% { box-shadow: 0 0 14px rgba(234, 88, 12, 0.6), inset 0 0 8px rgba(234, 88, 12, 0.15); border-color: rgba(234, 88, 12, 1); }
+  100% { box-shadow: 0 0 0px rgba(234, 88, 12, 0), inset 0 0 0px rgba(234, 88, 12, 0); border-color: rgba(234, 88, 12, 0.4); }
+}
+
+.order-card-ui.glowing-urgent {
+  animation: urgentGlow 2s ease-in-out infinite;
+}

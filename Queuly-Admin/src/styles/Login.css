@@ -1,0 +1,233 @@
+.admin-login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f7f4;
+  font-family: 'Inter', sans-serif;
+  padding: 20px;
+}
+
+.admin-login-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+  color: #3b2a1a;
+}
+
+.admin-login-logo svg {
+  margin-bottom: 8px;
+}
+
+.admin-login-logo h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.admin-login-logo p {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  margin: 4px 0 0 0;
+  text-transform: uppercase;
+  color: #5c4c3e;
+}
+
+.admin-login-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 12px;
+  padding: 48px;
+  box-shadow: 0 20px 40px rgba(59, 42, 26, 0.05);
+  box-sizing: border-box;
+}
+
+.admin-login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.admin-login-icon-circle {
+  width: 56px;
+  height: 56px;
+  background: #f2ebd9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  color: #4a3623;
+}
+
+.admin-login-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: #3b2a1a;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.admin-login-header p {
+  color: #6b5c50;
+  font-size: 14px;
+  margin: 0;
+}
+
+.admin-login-divider {
+  display: flex;
+  align-items: center;
+  margin-bottom: 32px;
+  color: #dcd3cb;
+}
+
+.admin-login-divider::before,
+.admin-login-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #efeae6;
+}
+
+.admin-login-divider svg {
+  margin: 0 16px;
+  color: #5c4c3e;
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-input-group {
+  margin-bottom: 24px;
+}
+
+.admin-input-group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #7b6c5f;
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.admin-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin-input-wrapper .input-icon-left {
+  position: absolute;
+  left: 16px;
+  color: #a3968b;
+  pointer-events: none;
+}
+
+.admin-input-wrapper input {
+  width: 100%;
+  padding: 14px 16px 14px 44px;
+  border: 1px solid #e0d8d0;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #3b2a1a;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.admin-input-wrapper input:focus {
+  border-color: #3b2a1a;
+}
+
+.admin-input-wrapper .input-icon-right {
+  position: absolute;
+  right: 16px;
+  color: #a3968b;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.admin-input-wrapper .input-icon-right:hover {
+  color: #3b2a1a;
+}
+
+.admin-form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  font-size: 13px;
+}
+
+.admin-remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #5c4c3e;
+  cursor: pointer;
+}
+
+.admin-forgot-password {
+  color: #b58860;
+  text-decoration: none;
+}
+
+.admin-forgot-password:hover {
+  text-decoration: underline;
+}
+
+.admin-submit-btn {
+  background: #3f2e21;
+  color: #ffffff;
+  border: none;
+  padding: 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.admin-submit-btn:hover:not(:disabled) {
+  background: #2b1f16;
+}
+
+.admin-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.admin-login-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 11px;
+  color: #7b6c5f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.admin-error-alert {
+  background: #fdf2f2;
+  border: 1px solid #f9dcdc;
+  color: #c43232;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 24px;
+  text-align: center;
+}

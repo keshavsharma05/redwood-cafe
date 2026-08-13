@@ -1,0 +1,238 @@
+/* ── TESTIMONIAL SECTION ── */
+.tm-section {
+  background: #faf7f4;
+  padding: 52px 6vw 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* ── HEADER ── */
+.tm-header {
+  margin-bottom: 28px;
+  max-width: 640px;
+}
+
+/* Eyebrow row — line · icon · text · line */
+.tm-eyebrow-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: #9c7c5a;
+}
+
+.tm-eyebrow-line {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: rgba(156, 124, 90, 0.45);
+}
+
+.tm-eyebrow-icon {
+  display: flex;
+  align-items: center;
+}
+
+.tm-eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  color: #9c7c5a;
+  text-transform: uppercase;
+}
+
+.tm-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(22px, 2.4vw, 34px);
+  font-weight: 700;
+  color: #2c1f14;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+}
+
+.tm-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: rgba(60, 40, 25, 0.55);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── QUOTE BLOCK ── */
+.tm-quote-block {
+  position: relative;
+  max-width: 860px;
+  width: 100%;
+  padding: 0 64px;
+  margin-bottom: 32px;
+}
+
+/* Big decorative curly quotes */
+.tm-curly {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 1;
+  color: #9c7c5a;
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.9;
+}
+
+.tm-curly--open {
+  top: -12px;
+  left: 0;
+}
+
+.tm-curly--close {
+  bottom: -40px;
+  right: 0;
+}
+
+/* The actual animated quote container */
+.tm-quote-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.tm-quote-text {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(20px, 2.8vw, 40px);
+  font-weight: 700;
+  color: #2c1f14;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* ── AUTHOR ── */
+.tm-author-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.tm-author-line {
+  width: 28px;
+  height: 1.5px;
+  background: #9c7c5a;
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+
+.tm-author-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #2c1f14;
+}
+
+.tm-author-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(60, 40, 25, 0.55);
+}
+
+.tm-author-meta em {
+  font-style: italic;
+}
+
+/* ── NAVIGATION ── */
+.tm-nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+/* Arrow buttons */
+.tm-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(44, 31, 20, 0.2);
+  background: transparent;
+  color: #2c1f14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.25s;
+}
+
+.tm-arrow:hover {
+  background: #2c1f14;
+  border-color: #2c1f14;
+  color: #f0e8de;
+  transform: scale(1.06);
+}
+
+/* Counter + dots */
+.tm-counter-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.tm-counter {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(60, 40, 25, 0.55);
+  letter-spacing: 0.05em;
+}
+
+.tm-counter-active {
+  font-weight: 700;
+  color: #9c7c5a;
+}
+
+.tm-counter-sep {
+  margin: 0 2px;
+}
+
+/* Dot indicators */
+.tm-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.tm-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(44, 31, 20, 0.18);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s, transform 0.3s, width 0.3s;
+}
+
+.tm-dot--active {
+  background: #9c7c5a;
+  width: 20px;
+  border-radius: 4px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .tm-section { padding: 72px 6vw 72px; }
+  .tm-quote-block { padding: 0 40px; }
+  .tm-curly { font-size: 72px; }
+}
+
+@media (max-width: 480px) {
+  .tm-quote-block { padding: 0 24px; }
+  .tm-curly { font-size: 54px; }
+  .tm-nav { gap: 20px; }
+}

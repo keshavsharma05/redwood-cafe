@@ -1,0 +1,320 @@
+﻿/* 
+ * Redwood CafÃ© - Minimalist Orders CSS
+ * Aesthetic: Ultra-Clean, Functional, Zen
+ */
+
+:root {
+  --orders-bg: #FBFBFB;
+  --orders-card: #FFFFFF;
+  --orders-text: #111111;
+  --orders-dim: #666666;
+  --orders-accent: #8D5B3A;
+  --orders-line: rgba(0, 0, 0, 0.05);
+  
+  --orders-radius: 20px;
+  --orders-shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.orders-page {
+  background-color: var(--orders-bg);
+  min-height: 100vh;
+  padding: 100px 20px 60px;
+  font-family: 'Manrope', sans-serif;
+  color: var(--orders-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =====================
+   HEADER (Clean Minimal)
+   ===================== */
+.orders-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--orders-line);
+}
+
+.orders-header-logo-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.orders-logo-premium {
+  height: 32px;
+  cursor: pointer;
+  filter: grayscale(1);
+  opacity: 0.8;
+}
+
+.back-btn-premium {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid var(--orders-line);
+  color: var(--orders-text);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.back-btn-premium:hover {
+  background: #F5F5F5;
+  transform: translateX(-2px);
+}
+
+.page-title-premium {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.4;
+}
+
+/* =====================
+   ORDERS LIST
+   ===================== */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.order-card-premium {
+  background: var(--orders-card);
+  border-radius: var(--orders-radius);
+  padding: 20px;
+  border: 1px solid var(--orders-line);
+  box-shadow: var(--orders-shadow-subtle);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+}
+
+.order-card-premium:hover {
+  transform: translateY(-2px);
+  border-color: var(--orders-accent);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* Card Header */
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.order-id-short {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--orders-dim);
+  letter-spacing: 0.05em;
+}
+
+.order-status-badge {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: white !important;
+}
+
+/* Items Area */
+.order-items-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.item-token {
+  background: #F3F3F3;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--orders-text);
+}
+
+.item-token-more {
+  font-size: 0.75rem;
+  color: var(--orders-dim);
+  align-self: center;
+}
+
+/* Footer / Meta */
+.order-meta-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid #FAFAFA;
+}
+
+.order-total {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--orders-text);
+  letter-spacing: -0.02em;
+}
+
+.order-timing {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--orders-accent);
+  background: #FFF8F4;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* Compact Tracking Link */
+.view-tracking-link {
+  display: block;
+  text-align: right;
+  margin-top: 12px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--orders-accent);
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.order-card-premium:hover .view-tracking-link {
+  opacity: 1;
+}
+
+/* =====================
+   DIVIDER (Minimal)
+   ===================== */
+.previous-orders-divider {
+  text-align: center;
+  margin: 40px 0 24px;
+  position: relative;
+}
+
+.previous-orders-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #F0F0F0;
+}
+
+.previous-orders-divider span {
+  position: relative;
+  background: var(--orders-bg);
+  padding: 0 20px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--orders-dim);
+  opacity: 0.5;
+}
+
+/* Completed Card Styling */
+.order-card-completed {
+  opacity: 0.6;
+  border-color: transparent;
+  background: #F9F9F9;
+}
+
+.order-card-completed:hover {
+  opacity: 1;
+  background: white;
+  border-color: var(--orders-line);
+}
+
+.order-card-completed .view-tracking-link {
+  display: none;
+}
+
+/* =====================
+   EMPTY / ERROR / LOADER
+   ===================== */
+.orders-empty-state, .orders-error-state {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  gap: 12px;
+}
+
+.empty-icon {
+  font-size: 3rem;
+  opacity: 0.1;
+}
+
+.orders-empty-state h3 {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--orders-text);
+}
+
+.order-now-btn-premium {
+  margin-top: 20px;
+  padding: 12px 32px;
+  background: var(--orders-text);
+  color: white;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.order-now-btn-premium:hover {
+  background: #333;
+  transform: translateY(-1px);
+}
+
+.loader-spin {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #EEE;
+  border-top-color: var(--orders-text);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animation-fade {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

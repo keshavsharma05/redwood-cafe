@@ -1,0 +1,272 @@
+.hero {
+  --bg: #f0e8df;
+  --text: #2c1f14;
+  --text-dim: #7a6555;
+  --accent: #6b4c36;
+  --divider: rgba(100, 75, 55, 0.2);
+  --font-display: "Playfair Display", "Cormorant Garamond", "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, sans-serif;
+
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 700px;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+.hero * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── BACKGROUND ── */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse at 50% 40%, #f5ede5 0%, #e8d9cc 60%, #d9c9b8 100%);
+}
+
+.hero__bg-solid {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+/* ── NAV ── */
+.hero__nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px clamp(40px, 5vw, 80px);
+}
+
+.hero__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.hero__nav-links {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.hero__nav-links li {
+  list-style: none;
+}
+
+/* Base nav button */
+.hero__nav-btn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 16px;
+  transition: opacity 0.25s;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.hero__nav-btn:hover {
+  opacity: 0.55;
+}
+
+/* Order Now — distinct pill CTA */
+.hero__nav-btn--cta {
+  background: #2c1f14;
+  color: #f0e8dc;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  transition: background 0.25s, transform 0.2s, opacity 1s;
+  opacity: 1;
+}
+
+.hero__nav-btn--cta:hover {
+  background: #8b6f52;
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+/* ── GIANT TEXT ── */
+.hero__word-container {
+  position: absolute;
+  top: 6%;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__word {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(120px, 18vw, 340px);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: #c2a882;
+  -webkit-text-fill-color: #c2a882;
+  filter: none;
+  user-select: none;
+}
+
+/* ── SPOON ── */
+.hero__spoon {
+  position: absolute;
+  top: 10%;
+  left: -8%;
+  z-index: 2;
+  width: clamp(200px, 40vw, 620px);
+  height: auto;
+  transform: rotate(-15deg);
+  filter: drop-shadow(8px 16px 24px rgba(80, 50, 20, 0.25)) brightness(1.0);
+}
+
+/* ── CUBES ── */
+.hero__cubes {
+  position: absolute;
+  top: 6%;
+  right: -8%;
+  z-index: 2;
+  width: clamp(150px, 36vw, 700px);
+  height: auto;
+  transform: rotate(3deg);
+  filter: drop-shadow(-8px 16px 24px rgba(80, 50, 20, 0.25)) brightness(1.0);
+}
+
+/* ── CUP ── */
+.hero__cup {
+  position: absolute;
+  bottom: -2%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  height: clamp(340px, 68vh, 860px);
+  width: auto;
+  filter: drop-shadow(0 24px 48px rgba(80, 50, 20, 0.3)) brightness(1.0);
+}
+
+/* ── LEFT PANEL ── */
+.hero__left {
+  position: absolute;
+  left: clamp(40px, 5vw, 80px);
+  bottom: 40px;
+  z-index: 5;
+}
+
+.hero__eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  border-top: 1px solid var(--divider);
+  padding-top: 12px;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(30px, 3.6vw, 52px);
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 28px;
+}
+
+.hero__explore-link {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 6px;
+  width: fit-content;
+  transition: opacity 0.3s;
+}
+
+.hero__explore-link:hover {
+  opacity: 0.6;
+}
+
+/* ── RIGHT PANEL ── */
+.hero__right {
+  position: absolute;
+  right: clamp(40px, 5vw, 80px);
+  bottom: 40px;
+  z-index: 5;
+  max-width: 240px;
+  text-align: left;
+}
+
+.hero__signature-icon {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero__signature-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--text-dim);
+  margin: 12px 0;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.hero__divider {
+  border: none;
+  border-top: 1px solid var(--divider);
+  width: 100%;
+}
+
+.hero__desc {
+  font-size: 12px;
+  line-height: 1.65;
+  color: var(--text-dim);
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 1024px) {
+  .hero__nav-links {
+    display: none;
+  }
+
+  .hero__cup {
+    height: 45vh;
+  }
+
+  .hero__right {
+    display: none;
+  }
+}

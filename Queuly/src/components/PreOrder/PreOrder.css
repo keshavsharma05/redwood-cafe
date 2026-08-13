@@ -1,0 +1,204 @@
+/* ── PREORDER / HOW IT WORKS SECTION ── */
+.po-section {
+  background: #f5ede4;
+  padding: 96px 0 0;
+}
+
+.po-inner {
+  max-width: 100%;
+}
+
+/* ── HEADER ── */
+.po-header {
+  text-align: center;
+  padding: 0 6vw 56px;
+}
+
+.po-eyebrow {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: #8b6f52;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.po-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 700;
+  color: #2c1f14;
+  margin: 0 0 14px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.po-icon-sep {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+/* ── TABS ── */
+.po-tabs {
+  display: inline-flex;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(44, 31, 20, 0.1);
+  border-radius: 50px;
+  padding: 6px;
+}
+
+.po-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #7a6555;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  white-space: nowrap;
+}
+
+.po-tab:hover {
+  color: #2c1f14;
+}
+
+.po-tab--active {
+  background: #f0e4d4;
+  color: #2c1f14;
+  font-weight: 600;
+}
+
+/* ── 4-COLUMN STEP GRID ── */
+.po-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+
+.po-step {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-right: 1px solid rgba(0,0,0,0.05);
+}
+
+.po-step:last-child {
+  border-right: none;
+}
+
+/* ── STEP IMAGE ── */
+.po-img {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  background: #ede8df;
+}
+
+.po-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s ease;
+}
+
+.po-step:hover .po-img img {
+  transform: scale(1.04);
+}
+
+/* Step number badge — sits between image and content */
+.po-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f5ede4;
+  border: 1px solid rgba(139, 111, 82, 0.25);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #8b6f52;
+  letter-spacing: 0.02em;
+  margin: 20px 0 0 20px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* ── STEP CONTENT ── */
+.po-content {
+  padding: 36px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.po-step-icon {
+  color: #8b6f52;
+  margin-bottom: 14px;
+}
+
+.po-step-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #2c1f14;
+  margin: 0 0 12px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.po-step-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #7a6555;
+  margin: 0 0 24px;
+  flex-grow: 1;
+}
+
+/* Small accent line at bottom of each card */
+.po-step-line {
+  width: 28px;
+  height: 2px;
+  background: #8b6f52;
+  border-radius: 2px;
+  margin-top: auto;
+  opacity: 0.5;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .po-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .po-step {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-right: none;
+  }
+
+  .po-step:nth-child(odd) {
+    border-right: 1px solid rgba(0,0,0,0.05);
+  }
+}
+
+@media (max-width: 560px) {
+  .po-section { padding: 72px 0 0; }
+  .po-grid { grid-template-columns: 1fr; }
+  .po-step:nth-child(odd) { border-right: none; }
+  .po-img { height: 240px; }
+  .po-tabs { flex-direction: column; border-radius: 16px; }
+  .po-tab { justify-content: center; }
+}

@@ -1,0 +1,39 @@
+# Environment variables (VERY IMPORTANT)
+.env
+.env.*
+!.env.example
+# Node modules
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build / dist
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.temp
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# Coverage / testing
+coverage/
+
+# Optional: local DB dumps
+*.dump
+*.bak
+
+# Optional: seed/debug outputs
+debug.log

@@ -1,0 +1,171 @@
+/* ── GLOBAL NAVBAR ── */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 24px clamp(32px, 5vw, 80px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: transparent;
+}
+
+.app-header--scrolled {
+  padding: 16px clamp(32px, 5vw, 80px);
+  background: rgba(245, 237, 229, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(44, 31, 20, 0.08);
+  box-shadow: 0 4px 24px rgba(44, 31, 20, 0.05);
+}
+
+.app-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+/* ── LOGO ── */
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.01em;
+  color: #2c1f14;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.25s ease;
+}
+
+.app-logo:hover {
+  opacity: 0.75;
+}
+
+/* ── NAV LINKS ── */
+.app-nav-links {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.app-nav-btn {
+  font-family: "Inter", -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #2c1f14;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  transition: opacity 0.25s ease;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.app-nav-btn:hover {
+  opacity: 0.55;
+}
+
+/* ── CTA BUTTON ── */
+.app-nav-btn--cta {
+  background: #2c1f14;
+  color: #f0e8dc;
+  padding: 10px 22px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  opacity: 1;
+  margin-left: 8px;
+}
+
+.app-nav-btn--cta:hover {
+  background: #8b6f52;
+  color: #ffffff;
+  opacity: 1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 111, 82, 0.25);
+}
+
+/* ── MOBILE HAMBURGER ── */
+.app-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 28px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.app-hamburger span {
+  width: 100%;
+  height: 2px;
+  background: #2c1f14;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.app-hamburger--active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 6px);
+}
+
+.app-hamburger--active span:nth-child(2) {
+  opacity: 0;
+}
+
+.app-hamburger--active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -6px);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .app-hamburger {
+    display: flex;
+  }
+
+  .app-nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 280px;
+    background: #f5ede5;
+    box-shadow: -10px 0 30px rgba(44, 31, 20, 0.12);
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+  }
+
+  .app-nav-links--open {
+    transform: translateX(0);
+  }
+
+  .app-nav-btn {
+    font-size: 16px;
+    padding: 10px 0;
+  }
+
+  .app-nav-btn--cta {
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+  }
+}

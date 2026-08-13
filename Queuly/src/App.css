@@ -1,0 +1,86 @@
+:root {
+  /* Core Palette */
+  --bone: #FCFAF8;
+  --layer: #FBF8F4;
+  --sand: #F2EDE4;
+  --slate: #706C61;
+  --ink: #1A1A1A;
+  --coffee-accent: #e6d8c8;
+  --line: rgba(0, 0, 0, 0.05);
+  
+  /* Shadows */
+  --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 15px 35px rgba(0, 0, 0, 0.05), 0 5px 12px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 35px 80px rgba(0, 0, 0, 0.10), 0 12px 25px rgba(0, 0, 0, 0.05);
+  
+  /* Radii */
+  --radius-card: 18px;
+  --radius-btn: 8px;
+  --radius-input: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  background-color: var(--bone);
+  color: var(--ink);
+  font-family: 'Manrope', 'Inter', -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Luxury Serif for Headings */
+h1, h2, h3 {
+  font-family: 'Playfair Display', 'DM Serif Display', serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Base button reset and refined styles */
+button {
+  font-family: 'Manrope', sans-serif;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: all 0.3s ease;
+}
+
+.btn-premium {
+  background: var(--coffee-accent);
+  color: #1c1816;
+  padding: 12px 24px;
+  border-radius: var(--radius-btn);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+/* Global scrollbar for premium look */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bone);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sand);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--slate);
+  opacity: 0.5;
+}

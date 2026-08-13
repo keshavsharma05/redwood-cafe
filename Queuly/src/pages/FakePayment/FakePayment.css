@@ -1,0 +1,334 @@
+.fakepay-page {
+  min-height: 100vh;
+  background-color: #F8F5F0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+  color: #2c1f14;
+}
+
+.fakepay-logo-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.fakepay-logo-circle {
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid #2c1f14;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.fakepay-logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fakepay-logo-text .logo-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.15em;
+  margin-bottom: 4px;
+}
+
+.fakepay-logo-text .logo-sub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+}
+
+.fakepay-logo-text .logo-sub .line {
+  width: 16px;
+  height: 1px;
+  background-color: #A99681;
+}
+
+.fakepay-single-card {
+  width: 100%;
+  max-width: 500px;
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(44, 31, 20, 0.04);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.fakepay-amount-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.payable-label {
+  font-size: 13px;
+  color: rgba(44, 31, 20, 0.6);
+  margin: 0 0 8px;
+}
+
+.payable-value {
+  font-size: 36px;
+  font-weight: 600;
+  margin: 0;
+  color: #2A2015;
+}
+
+.fakepay-tree-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 32px;
+  width: 180px;
+}
+
+.fakepay-tree-divider::before,
+.fakepay-tree-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: rgba(44, 31, 20, 0.1);
+  margin: 0 16px;
+}
+
+.fakepay-payment-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.payment-section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #2c1f14;
+}
+
+.section-secure {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: rgba(44, 31, 20, 0.6);
+}
+
+.payment-method-accordion {
+  border: 1px solid rgba(44, 31, 20, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-title-group strong {
+  display: block;
+  font-size: 14px;
+  color: #2c1f14;
+  margin-bottom: 4px;
+}
+
+.accordion-title-group p {
+  font-size: 12px;
+  color: rgba(44, 31, 20, 0.5);
+  margin: 0;
+}
+
+.upi-options-container {
+  border: 1px solid rgba(44, 31, 20, 0.08);
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #FAFAFA;
+}
+
+.upi-radio-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.radio-btn {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(44, 31, 20, 0.3);
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radio-btn.active {
+  border-color: #2A2015;
+}
+
+.radio-inner {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #2A2015;
+}
+
+.upi-option-text strong {
+  display: block;
+  font-size: 13px;
+  color: #2c1f14;
+  margin-bottom: 4px;
+}
+
+.upi-option-text p {
+  font-size: 11px;
+  color: rgba(44, 31, 20, 0.5);
+  margin: 0;
+}
+
+.upi-input-wrapper {
+  margin-top: 12px;
+  padding-left: 28px;
+}
+
+.upi-input-wrapper input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid rgba(44, 31, 20, 0.15);
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #2c1f14;
+  outline: none;
+  background: #FFFFFF;
+}
+
+.upi-input-wrapper input:focus {
+  border-color: #2A2015;
+}
+
+.upi-or-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+  padding-left: 28px;
+}
+
+.upi-or-divider::before,
+.upi-or-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(44, 31, 20, 0.08);
+}
+
+.upi-or-divider span {
+  font-size: 10px;
+  color: rgba(44, 31, 20, 0.4);
+  padding: 0 12px;
+}
+
+.disabled-option {
+  opacity: 0.6;
+}
+
+.fakepay-submit-btn {
+  width: 100%;
+  padding: 16px;
+  background-color: #382A1D; /* Dark rich brown */
+  color: #FFFFFF;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.fakepay-submit-btn:hover {
+  background-color: #211810;
+}
+
+.fakepay-secure-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  color: rgba(44, 31, 20, 0.5);
+}
+
+/* Processing States */
+.fakepay-processing-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  text-align: center;
+}
+
+.spinner-premium {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(44, 31, 20, 0.1);
+  border-top-color: #2A2015;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.success-icon-premium {
+  width: 48px;
+  height: 48px;
+  background-color: #2A2015;
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.fakepay-processing-state h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.fakepay-processing-state p {
+  color: rgba(44, 31, 20, 0.6);
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .fakepay-single-card {
+    padding: 32px 20px;
+  }
+}

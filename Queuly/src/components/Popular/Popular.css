@@ -1,0 +1,213 @@
+/* ── MORE THAN JUST COFFEE — POPULAR / VALUES SECTION ── */
+
+.mtjc-section {
+  position: relative;
+  background: url('/popular_bg.png') center center / cover no-repeat;
+  padding: 52px 6vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+/* subtle overlay so cards stay legible over the photo */
+.mtjc-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(240, 232, 218, 0.45);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── INNER CONTAINER ── */
+.mtjc-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1160px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── HEADER ── */
+.mtjc-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.mtjc-title {
+  font-family: 'Playfair Display', 'DM Serif Display', Georgia, serif;
+  font-size: clamp(26px, 3vw, 44px);
+  font-weight: 700;
+  color: #2c1f14;
+  margin: 0 0 14px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* ── ICON SEPARATOR ── */
+.mtjc-sep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.mtjc-sep-line {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: rgba(156, 124, 90, 0.45);
+}
+
+.mtjc-sep-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9c7c5a;
+}
+
+/* ── SUBTITLE ── */
+.mtjc-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 14.5px;
+  color: rgba(60, 40, 25, 0.62);
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+  margin: 0 auto;
+  max-width: 420px;
+}
+
+/* ── FEATURE GRID ── */
+.mtjc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid rgba(139, 111, 82, 0.14);
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(4px);
+}
+
+/* ── FEATURE CARD ── */
+.mtjc-card {
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-right: 1px solid rgba(139, 111, 82, 0.12);
+  transition: background 0.35s ease;
+}
+
+.mtjc-card:last-child {
+  border-right: none;
+}
+
+.mtjc-card:hover {
+  background: rgba(255, 255, 255, 0.68);
+}
+
+/* ── ICON CIRCLE ── */
+.mtjc-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(235, 222, 206, 0.9);
+  border: 1px solid rgba(139, 111, 82, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7a5c3a;
+  margin-bottom: 22px;
+  flex-shrink: 0;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.mtjc-card:hover .mtjc-card-icon {
+  background: rgba(220, 204, 183, 1);
+  transform: translateY(-2px);
+}
+
+/* ── CARD TITLE ── */
+.mtjc-card-title {
+  font-family: 'Playfair Display', 'DM Serif Display', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #2c1f14;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+/* ── CARD DESCRIPTION ── */
+.mtjc-card-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(60, 40, 25, 0.6);
+  line-height: 1.75;
+  margin: 0 0 20px;
+  flex-grow: 1;
+}
+
+/* ── BOTTOM ACCENT LINE ── */
+.mtjc-card-line {
+  width: 24px;
+  height: 1.5px;
+  background: rgba(139, 111, 82, 0.45);
+  border-radius: 2px;
+  margin-top: auto;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .mtjc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mtjc-card {
+    border-bottom: 1px solid rgba(139, 111, 82, 0.12);
+  }
+
+  .mtjc-card:nth-child(2) {
+    border-right: none;
+  }
+
+  .mtjc-card:nth-child(3) {
+    border-bottom: none;
+  }
+
+  .mtjc-card:nth-child(4) {
+    border-right: none;
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 580px) {
+  .mtjc-section {
+    padding: 72px 5vw 72px;
+  }
+
+  .mtjc-grid {
+    grid-template-columns: 1fr;
+    border-radius: 14px;
+  }
+
+  .mtjc-card {
+    border-right: none;
+    border-bottom: 1px solid rgba(139, 111, 82, 0.12);
+  }
+
+  .mtjc-card:last-child {
+    border-bottom: none;
+  }
+
+  .mtjc-plant {
+    width: 90px;
+    opacity: 0.6;
+  }
+
+  .mtjc-header {
+    margin-bottom: 44px;
+  }
+}

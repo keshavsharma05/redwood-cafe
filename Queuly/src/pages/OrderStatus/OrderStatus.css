@@ -1,0 +1,529 @@
+.order-status-page {
+  min-height: 100vh;
+  background-color: #FDFBF7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 20px 40px;
+  font-family: 'Inter', sans-serif;
+  color: #2c1f14;
+}
+
+/* =========================================
+   HEADER LOGO
+   ========================================= */
+.status-logo-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.status-logo-circle {
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid #2c1f14;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.status-logo-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status-logo-text .logo-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.15em;
+  margin-bottom: 4px;
+}
+
+.status-logo-text .logo-sub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+}
+
+.status-logo-text .logo-sub .line {
+  width: 16px;
+  height: 1px;
+  background-color: #A99681;
+}
+
+/* =========================================
+   MAIN CONTAINER (Split Cards)
+   ========================================= */
+.status-main-container {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 40px;
+  align-items: stretch;
+}
+
+.status-left-card,
+.status-right-card {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(44, 31, 20, 0.04);
+  border: 1px solid rgba(44, 31, 20, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.status-left-card {
+  flex: 1;
+  padding: 48px;
+}
+
+.status-right-card {
+  flex: 1.2;
+  display: flex;
+  flex-direction: row; /* Split details and info */
+  padding: 0; /* padding handled inside panes */
+  overflow: hidden;
+}
+
+/* =========================================
+   LEFT CARD (STATUS)
+   ========================================= */
+.status-top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.status-title-group {
+  display: flex;
+  gap: 20px;
+}
+
+.status-check-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid #386A41;
+  color: #386A41;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.status-title-texts h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: #2c1f14;
+}
+
+.status-title-texts p {
+  font-size: 13px;
+  color: rgba(44, 31, 20, 0.7);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.status-id-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.order-id-box {
+  border: 1px solid rgba(44, 31, 20, 0.1);
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 140px;
+}
+
+.order-id-box .label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(44, 31, 20, 0.5);
+  margin-bottom: 4px;
+}
+
+.order-id-box .value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c1f14;
+}
+
+.order-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: rgba(44, 31, 20, 0.6);
+  font-weight: 500;
+}
+
+.status-divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(44, 31, 20, 0.08);
+  margin-bottom: 32px;
+}
+
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 32px;
+}
+
+.status-stepper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.step-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  width: 60px;
+}
+
+.step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  border: 2px solid rgba(44, 31, 20, 0.15);
+  color: rgba(44, 31, 20, 0.4);
+  transition: all 0.3s ease;
+}
+
+.step-node.completed .step-icon {
+  background-color: #3D5A40;
+  border-color: #3D5A40;
+  color: #FFFFFF;
+}
+
+/* Custom coloring for "Prepared" or other active states if needed */
+.step-node:nth-child(5).completed .step-icon {
+  background-color: #6C4F3D; /* Brownish for prepared */
+  border-color: #6C4F3D;
+}
+
+.step-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c1f14;
+}
+
+.step-time {
+  font-size: 11px;
+  color: rgba(44, 31, 20, 0.5);
+}
+
+.step-node.pending .step-label,
+.step-node.pending .step-time {
+  opacity: 0.6;
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  margin-top: 24px;
+  background-color: rgba(44, 31, 20, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.step-line.solid {
+  background-color: #3D5A40; /* Same green as completed nodes */
+}
+
+.step-line.dashed {
+  background: repeating-linear-gradient(
+    to right,
+    rgba(44, 31, 20, 0.2) 0,
+    rgba(44, 31, 20, 0.2) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+.status-notification-box {
+  background-color: #F8F5F0;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-top: auto; /* Push to bottom of left card */
+}
+
+.bell-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #3D5A40;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.notification-texts strong {
+  display: block;
+  font-size: 13px;
+  color: #2c1f14;
+  margin-bottom: 4px;
+}
+
+.notification-texts p {
+  font-size: 12px;
+  color: rgba(44, 31, 20, 0.6);
+  margin: 0;
+}
+
+/* =========================================
+   RIGHT CARD (DETAILS & INFO)
+   ========================================= */
+.order-details-pane {
+  flex: 1.3;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.delivery-info-pane {
+  flex: 0.8;
+  background-color: #FAFAFA;
+  padding: 48px 32px;
+  border-left: 1px solid rgba(44, 31, 20, 0.05);
+}
+
+.details-table-header {
+  display: flex;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(44, 31, 20, 0.1);
+  margin-bottom: 16px;
+}
+
+.col-item { flex: 2; font-size: 11px; font-weight: 600; color: rgba(44,31,20,0.6); }
+.col-qty { flex: 0.5; font-size: 11px; font-weight: 600; color: rgba(44,31,20,0.6); text-align: center; }
+.col-price { flex: 1; font-size: 11px; font-weight: 600; color: rgba(44,31,20,0.6); text-align: right; }
+
+.details-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 24px;
+  flex: 1; /* Pushes totals down */
+}
+
+.details-item-row {
+  display: flex;
+  align-items: center;
+}
+
+.details-item-row .col-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2c1f14;
+}
+
+.details-item-row .col-item img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.details-item-row .col-qty {
+  font-size: 14px;
+  color: #2c1f14;
+}
+
+.details-item-row .col-price {
+  font-size: 14px;
+  color: #2c1f14;
+}
+
+.details-totals {
+  border-top: 1px solid rgba(44, 31, 20, 0.1);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: rgba(44, 31, 20, 0.7);
+}
+
+.grand-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(44, 31, 20, 0.1);
+  padding-top: 24px;
+}
+
+.grand-total-row span:first-child {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.grand-val {
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c1f14;
+}
+
+/* Delivery Info Pane */
+.info-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0 0 32px;
+}
+
+.info-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.info-block svg {
+  color: rgba(44, 31, 20, 0.6);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.info-block div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(44, 31, 20, 0.6);
+}
+
+.info-val {
+  font-size: 13px;
+  font-weight: 500;
+  color: #2c1f14;
+  white-space: pre-line;
+  line-height: 1.4;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.status-page-footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.status-page-footer p {
+  font-size: 13px;
+  color: rgba(44, 31, 20, 0.6);
+  margin: 0 0 16px;
+}
+
+.status-page-footer a {
+  color: #8b6f52;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.back-home-btn {
+  background-color: transparent;
+  border: 1px solid rgba(44, 31, 20, 0.2);
+  border-radius: 8px;
+  padding: 14px 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2c1f14;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: background-color 0.2s;
+}
+
+.back-home-btn:hover {
+  background-color: rgba(44, 31, 20, 0.05);
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+@media (max-width: 1024px) {
+  .status-main-container {
+    flex-direction: column;
+  }
+  
+  .status-right-card {
+    flex-direction: column;
+  }
+  
+  .delivery-info-pane {
+    border-left: none;
+    border-top: 1px solid rgba(44, 31, 20, 0.05);
+  }
+}
+
+@media (max-width: 600px) {
+  .status-top-section {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .status-stepper {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  
+  .step-line {
+    display: none;
+  }
+  
+  .status-left-card, 
+  .order-details-pane, 
+  .delivery-info-pane {
+    padding: 24px;
+  }
+}
