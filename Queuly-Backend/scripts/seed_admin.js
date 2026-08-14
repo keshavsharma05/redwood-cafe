@@ -1,7 +1,9 @@
-﻿import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
+import dns from 'dns';
 
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 dotenv.config();
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/redwood-cafe';

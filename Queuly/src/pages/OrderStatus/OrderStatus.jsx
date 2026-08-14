@@ -25,28 +25,20 @@ export default function OrderStatus() {
   const fetchOrder = React.useCallback(async (isInitial = false) => {
     if (isInitial) setLoading(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/orders/${orderId}`);
+      const token = localStorage.getItem("userToken");
+      const res = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
       if (!res.ok) {
+        if (res.status === 401) throw new Error("Your session has expired. Please sign in again.");
         if (res.status === 404) throw new Error("Order not found.");
         throw new Error("Unable to retrieve order details.");
       }
       const resData = await res.json();
       
-      const menuItems = JSON.parse(localStorage.getItem("towncoffee-menu")) || [];
-      const enrichedOrder = {
-        ...resData.data,
-        items: (resData.data.items || []).map(orderItem => {
-          const menuInfo = menuItems.find(m => String(m.id) === String(orderItem.itemId));
-          return {
-            ...orderItem,
-            title: menuInfo?.title || orderItem.title || "Unknown Item",
-            price: menuInfo?.price || orderItem.price || 0,
-            image: menuInfo?.image || orderItem.image || null
-          };
-        })
-      };
-
-      setOrder(enrichedOrder);
+      setOrder(resData.data);
       setError(null);
     } catch (err) {
       console.error("Failed to fetch order", err);
