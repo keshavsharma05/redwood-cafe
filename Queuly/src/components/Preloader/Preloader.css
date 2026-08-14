@@ -1,7 +1,7 @@
 .preloader-container {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #F8F5F0;
+  background-color: #FDFCF9;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,16 +9,11 @@
   overflow: hidden;
 }
 
-/* Subtle CSS shadow overlays to mimic the leafy shadows */
-.preloader-shadow-overlay {
+.preloader-bg-overlay {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at center, rgba(141, 91, 58, 0.05) 0%, transparent 60%);
   pointer-events: none;
-  background: 
-    radial-gradient(circle at 85% -15%, rgba(180, 166, 149, 0.2) 0%, transparent 45%),
-    radial-gradient(circle at -15% 85%, rgba(180, 166, 149, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 110% 70%, rgba(180, 166, 149, 0.12) 0%, transparent 35%);
-  filter: blur(20px);
 }
 
 .preloader-content {
@@ -27,111 +22,90 @@
   flex-direction: column;
   align-items: center;
   z-index: 1;
+  animation: contentFadeIn 0.8s ease-out;
 }
 
-.preloader-logo-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
+@keyframes contentFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.steam-lines {
-  height: 40px;
-  overflow: hidden;
-  margin-bottom: 4px;
-}
-
-.steam-line {
-  animation: floatSteam 2s infinite ease-in-out alternate;
-}
-.steam-2 { animation-delay: 0.4s; }
-.steam-3 { animation-delay: 0.8s; }
-
-@keyframes floatSteam {
-  0% { transform: translateY(0); opacity: 0.4; }
-  100% { transform: translateY(-4px); opacity: 1; }
-}
-
-.tree-circle {
+.preloader-spinner-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
+}
+
+.preloader-center-logo {
+  position: absolute;
+  width: 50px;
+  height: auto;
+  opacity: 0.9;
+  animation: logoBreathe 3s ease-in-out infinite alternate;
+}
+
+@keyframes logoBreathe {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
+.preloader-spinner {
+  width: 100%;
+  height: 100%;
+  animation: spin 2s linear infinite;
+}
+
+.spinner-track {
+  fill: transparent;
+  stroke: rgba(44, 31, 20, 0.08);
+  stroke-width: 4;
+}
+
+.spinner-path {
+  fill: transparent;
+  stroke: #4B382A;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 200;
+  stroke-dashoffset: 140;
+  animation: spinnerDash 2.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes spinnerDash {
+  0% { stroke-dasharray: 10, 300; stroke-dashoffset: 0; }
+  50% { stroke-dasharray: 140, 300; stroke-dashoffset: -40; }
+  100% { stroke-dasharray: 10, 300; stroke-dashoffset: -280; }
 }
 
 .preloader-title {
   font-family: 'Playfair Display', serif;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: #2c1f14;
-  letter-spacing: 0.15em;
   margin: 0 0 12px;
-  text-align: center;
-}
-
-.preloader-subtitle {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.preloader-subtitle .line {
-  height: 1px;
-  width: 24px;
-  background-color: #B4A695;
-  opacity: 0.6;
-}
-
-.preloader-subtitle span:not(.line) {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.4em;
-  color: #2c1f14;
-}
-
-.preloader-divider {
-  width: 32px;
-  height: 1px;
-  background-color: #B4A695;
-  opacity: 0.6;
-  margin: 0 auto 24px;
+  letter-spacing: 0.05em;
 }
 
 .preloader-msg {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 16px;
-  margin: 0 0 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.02em;
-  background: linear-gradient(90deg, #2c1f14 0%, #B4A695 50%, #2c1f14 100%);
-  background-size: 200% auto;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: shimmerText 2.5s infinite linear;
+  color: #7C746E;
+  margin: 0;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  animation: pulseText 2s ease-in-out infinite;
 }
 
-@keyframes shimmerText {
-  to {
-    background-position: 200% center;
-  }
-}
-
-.preloader-logo-pulse {
-  animation: logoPulse 2.5s infinite ease-in-out;
-}
-
-@keyframes logoPulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.85;
-  }
-  50% {
-    transform: scale(1.03);
-    opacity: 1;
-  }
+@keyframes pulseText {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
