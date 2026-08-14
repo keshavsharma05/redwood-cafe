@@ -70,36 +70,38 @@ export default function Orders() {
 
   return (
     <div className="orders-page animation-fade">
-      <header className="orders-header">
-        <button className="back-btn-premium" onClick={() => navigate("/menu")}>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-        </button>
-        
-        <div className="orders-header-logo-wrapper">
-          <img 
-            className="orders-logo-premium" 
-            src="/logo1.png" 
-            alt="Redwood Café" 
-            onClick={() => navigate("/")} 
-          />
-        </div>
-
-        <h1 className="page-title-premium">My Orders</h1>
-      </header>
+      <div className="orders-page-header">
+        <h1 className="orders-page-title">My Orders</h1>
+        <p className="orders-page-subtitle">Track your current order or place a new one.</p>
+      </div>
 
       {error ? (
         <div className="orders-error-state">
           <p>{error}</p>
-          <button className="order-now-btn-premium" onClick={() => navigate("/menu")}>Go to Menu</button>
+          <button className="orders-browse-btn" onClick={() => navigate("/menu")}>Go to Menu</button>
         </div>
       ) : (
-        <div className="orders-empty-state">
-          <div className="empty-icon">☕</div>
-          <h3>No active orders</h3>
-          <p>Your next coffee is waiting to happen.</p>
-          <button className="order-now-btn-premium" onClick={() => navigate("/menu")}>Browse Menu</button>
+        <div className="orders-empty-state-card">
+          <img src="/cup.png" alt="Coffee Cup" className="orders-empty-icon" />
+          <h2 className="orders-empty-title">No active orders</h2>
+          <p className="orders-empty-text">
+            You don't have an active order right now.<br/>
+            Your next favorite might be waiting on the menu.
+          </p>
+          <button className="orders-browse-btn" onClick={() => navigate("/menu")}>
+            Browse Menu <span>→</span>
+          </button>
         </div>
       )}
+
+      <footer className="orders-footer">
+        <div className="orders-footer-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2c1f14" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 22v-4"/><path d="M12 18 8 13h3L8 7h3l1-4 1 4h3l-3 6h3l-4 5z"/>
+          </svg>
+        </div>
+        <p>Thanks for choosing Redwood Cafe.<br/>We hope to serve you again soon!</p>
+      </footer>
     </div>
   );
 }
