@@ -109,27 +109,35 @@ export default function Navbar({ onOpenAuth }) {
               <button 
                 className="app-nav-btn profile-card-btn" 
                 onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
               >
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#386A41', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '14px' }}>
+                <div className="profile-avatar">
                   {userName.charAt(0).toUpperCase()}
                 </div>
-                <span>{userName}</span>
+                <span className="profile-name">{userName}</span>
               </button>
               
               {profileDropdownOpen && (
-                <div className="profile-dropdown" style={{ position: 'absolute', top: 'calc(100% + 8px)', right: '0', backgroundColor: '#FFFFFF', border: '1px solid rgba(44,31,20,0.05)', borderRadius: '12px', boxShadow: '0 10px 40px rgba(44,31,20,0.1)', minWidth: '180px', padding: '12px', zIndex: 100, display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <button className="app-nav-btn" style={{ textAlign: 'left', padding: '8px 12px', width: '100%' }} onClick={() => { setProfileDropdownOpen(false); navigate('/orders'); }}>My Orders</button>
-                  <button className="app-nav-btn" style={{ textAlign: 'left', padding: '8px 12px', width: '100%' }} onClick={() => { setProfileDropdownOpen(false); navigate('/history'); }}>Order History</button>
-                  <div style={{ height: '1px', backgroundColor: 'rgba(44,31,20,0.1)', margin: '4px 0' }}></div>
-                  <button className="app-nav-btn" style={{ textAlign: 'left', padding: '8px 12px', width: '100%', color: '#A53636' }} onClick={() => {
+                <div className="profile-dropdown-menu">
+                  <button className="profile-dropdown-item" onClick={() => { setProfileDropdownOpen(false); navigate('/orders'); }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    My Orders
+                  </button>
+                  <button className="profile-dropdown-item" onClick={() => { setProfileDropdownOpen(false); navigate('/history'); }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    Order History
+                  </button>
+                  <div className="profile-dropdown-divider"></div>
+                  <button className="profile-dropdown-item profile-dropdown-item--danger" onClick={() => {
                     localStorage.removeItem('userToken');
                     localStorage.removeItem('userName');
                     localStorage.removeItem('userPhone');
                     localStorage.removeItem('towncoffee-user');
                     window.dispatchEvent(new Event('auth-change'));
                     setProfileDropdownOpen(false);
-                  }}>Log Out</button>
+                  }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Log Out
+                  </button>
                 </div>
               )}
             </li>

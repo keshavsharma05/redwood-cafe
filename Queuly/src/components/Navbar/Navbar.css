@@ -169,3 +169,104 @@
     text-align: center;
   }
 }
+
+/* ── PROFILE UI ── */
+.profile-card-wrapper {
+  position: relative;
+}
+
+.profile-card-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 6px !important;
+  border-radius: 50px;
+  transition: background-color 0.2s ease, opacity 0.25s ease !important;
+}
+
+.profile-card-btn:hover {
+  background-color: rgba(44, 31, 20, 0.05);
+  opacity: 1 !important;
+}
+
+.profile-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #387042;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0;
+}
+
+.profile-name {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #2c1f14;
+}
+
+.profile-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(44, 31, 20, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  min-width: 200px;
+  padding: 8px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: dropdownFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dropdownFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-dropdown-item {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2c1f14;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px 16px;
+  text-align: left;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-dropdown-item:hover {
+  background-color: rgba(44, 31, 20, 0.04);
+}
+
+.profile-dropdown-item--danger {
+  color: #d32f2f;
+}
+
+.profile-dropdown-item--danger:hover {
+  background-color: rgba(211, 47, 47, 0.05);
+}
+
+.profile-dropdown-divider {
+  height: 1px;
+  background-color: rgba(44, 31, 20, 0.08);
+  margin: 6px 0;
+}
