@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import API_BASE_URL from "../../config";
 import "./Orders.css";
 
+const ACTIVE_STATUSES = ["scheduled", "confirmed", "inbox", "preparing", "ready"];
+
 export default function Orders() {
   const navigate = useNavigate();
-  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -27,10 +28,20 @@ export default function Orders() {
         });
         if (!res.ok) {
           if (res.status === 401) throw new Error("Your session has expired. Please sign in again.");
+          if (res.status === 403) throw new Error("You do not have permission to view these orders.");
           throw new Error("Failed to fetch orders");
         }
         const resData = await res.json();
-        setOrders(resData.data || []);
+        const allOrders = resData.data || [];
+        
+        const sortedOrders = allOrders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        const activeOrder = sortedOrders.find(o => ACTIVE_STATUSES.includes((o.status || "").toLowerCase()));
+
+        if (activeOrder) {
+          navigate(`/order-status?orderId=${activeOrder._id}`, { replace: true });
+        } else {
+          setLoading(false);
+        }
       } catch (err) {
         console.error(err);
         if (err.message.includes("session")) {
@@ -39,38 +50,20 @@ export default function Orders() {
           localStorage.removeItem("towncoffee-user");
           navigate("/menu");
         } else {
-          setError("Unable to load orders. Please try again.");
+          setError(err.message || "Unable to load orders. Please try again.");
+          setLoading(false);
         }
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchOrders();
-    const interval = setInterval(fetchOrders, 10000); // Poll every 10s
-    return () => clearInterval(interval);
-  }, [phone]);
-
-  const getStatusColor = (status) => {
-    const s = status?.toLowerCase();
-    if (s === "preparing") return "#ff9800"; // orange
-    if (s === "ready") return "#4caf50";    // green
-    if (s === "completed") return "#8bc34a"; // light green
-    if (s === "scheduled" || s === "confirmed") return "#2196f3"; // blue
-    return "#9e9e9e"; // grey
-  };
-
-  const getStatusLabel = (status) => {
-    const s = status?.toLowerCase();
-    if (s === "scheduled" || s === "confirmed") return "Booked";
-    return status;
-  };
+  }, [phone, navigate]);
 
   if (loading) {
     return (
       <div className="orders-page-loading">
         <div className="loader-spin"></div>
-        <p>Fetching your orders...</p>
+        <p>Checking active orders...</p>
       </div>
     );
   }
@@ -86,12 +79,12 @@ export default function Orders() {
           <img 
             className="orders-logo-premium" 
             src="/logo1.png" 
-            alt="Redwood CafÃ©" 
+            alt="Redwood Café" 
             onClick={() => navigate("/")} 
           />
         </div>
 
-        <h1 className="page-title-premium">Orders</h1>
+        <h1 className="page-title-premium">My Orders</h1>
       </header>
 
       {error ? (
@@ -99,107 +92,12 @@ export default function Orders() {
           <p>{error}</p>
           <button className="order-now-btn-premium" onClick={() => navigate("/menu")}>Go to Menu</button>
         </div>
-      ) : orders.length === 0 ? (
-        <div className="orders-empty-state">
-          <div className="empty-icon">â˜•</div>
-          <h3>No active orders</h3>
-          <p>Hungry? Start an order from our menu.</p>
-          <button className="order-now-btn-premium" onClick={() => navigate("/menu")}>Browse Menu</button>
-        </div>
       ) : (
-        <div className="orders-list">
-          {(() => {
-            const activeOrders = orders.filter(o => o.status?.toLowerCase() !== "completed");
-            const completedOrders = orders.filter(o => o.status?.toLowerCase() === "completed");
-            
-            return (
-              <>
-                {activeOrders.map((order, index) => (
-                  <div 
-                    key={order._id} 
-                    className="order-card-premium"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                    onClick={() => navigate(`/order-status?orderId=${order._id}`)}
-                  >
-                    <div className="order-card-header">
-                      <span className="order-id-short">REF: {order._id.slice(-6).toUpperCase()}</span>
-                      <span 
-                        className="order-status-badge"
-                        style={{ backgroundColor: getStatusColor(order.status) }}
-                      >
-                        {getStatusLabel(order.status)}
-                      </span>
-                    </div>
-                    
-                    <div className="order-card-body">
-                      <div className="order-items-preview">
-                        {order.items.slice(0, 2).map((item, idx) => (
-                          <span key={idx} className="item-token">{item.qty}x {item.title}</span>
-                        ))}
-                        {order.items.length > 2 && <span className="item-token-more">+{order.items.length - 2} more</span>}
-                      </div>
-                      
-                      <div className="order-meta-info">
-                        <span className="order-total">â‚¹{order.total}</span>
-                        {order.orderType === "scheduled" && (
-                          <span className="order-timing">ðŸ“… {order.arrivalTime}</span>
-                        )}
-                        {order.orderType === "arrived" && (
-                          <span className="order-timing">ðŸ“ Table {order.tableNumber}</span>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <span className="view-tracking-link">View Details â†’</span>
-                  </div>
-                ))}
-
-                {completedOrders.length > 0 && (
-                  <>
-                    <div className="previous-orders-divider">
-                      <span>Previous Orders</span>
-                    </div>
-                    {completedOrders.map((order, index) => (
-                      <div 
-                        key={order._id} 
-                        className="order-card-premium order-card-completed"
-                        style={{ animationDelay: `${(activeOrders.length + index) * 0.05}s` }}
-                      >
-                        <div className="order-card-header">
-                          <span className="order-id-short">REF: {order._id.slice(-6).toUpperCase()}</span>
-                          <span 
-                            className="order-status-badge"
-                            style={{ backgroundColor: getStatusColor(order.status) }}
-                          >
-                            {getStatusLabel(order.status)}
-                          </span>
-                        </div>
-                        
-                        <div className="order-card-body">
-                          <div className="order-items-preview">
-                            {order.items.slice(0, 2).map((item, idx) => (
-                              <span key={idx} className="item-token">{item.qty}x {item.title}</span>
-                            ))}
-                            {order.items.length > 2 && <span className="item-token-more">+{order.items.length - 2} more</span>}
-                          </div>
-                          
-                          <div className="order-meta-info">
-                            <span className="order-total">â‚¹{order.total}</span>
-                            {order.orderType === "scheduled" && (
-                              <span className="order-timing">ðŸ“… {order.arrivalTime}</span>
-                            )}
-                            {order.orderType === "arrived" && (
-                              <span className="order-timing">ðŸ“ Table {order.tableNumber}</span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </>
-                )}
-              </>
-            );
-          })()}
+        <div className="orders-empty-state">
+          <div className="empty-icon">☕</div>
+          <h3>No active orders</h3>
+          <p>Your next coffee is waiting to happen.</p>
+          <button className="order-now-btn-premium" onClick={() => navigate("/menu")}>Browse Menu</button>
         </div>
       )}
     </div>
