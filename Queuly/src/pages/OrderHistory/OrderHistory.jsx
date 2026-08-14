@@ -177,15 +177,32 @@ export default function OrderHistory() {
 
   useEffect(() => {
     if (!storedUser?.phone) { navigate("/menu"); return; }
-    fetch(`${API_BASE_URL}/api/orders/user/${storedUser.phone}`)
-      .then((r) => r.json())
+    const token = localStorage.getItem("userToken");
+    fetch(`${API_BASE_URL}/api/orders/user/${storedUser.phone}`, {
+      headers: { "Authorization": `Bearer ${token}` }
+    })
+      .then(async (r) => {
+        if (!r.ok) {
+          if (r.status === 401) throw new Error("Your session has expired. Please sign in again.");
+          throw new Error("Failed to fetch");
+        }
+        return r.json();
+      })
       .then((d) => {
         const sorted = (d.data || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         setOrders(sorted);
         if (sorted.length > 0) setSelected(sorted[0]);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((err) => {
+        setLoading(false);
+        if (err.message.includes("session")) {
+          alert(err.message);
+          localStorage.removeItem("userToken");
+          localStorage.removeItem("towncoffee-user");
+          navigate("/menu");
+        }
+      });
   }, [navigate]);
 
   /* filters */

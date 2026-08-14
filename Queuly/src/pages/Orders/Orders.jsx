@@ -21,13 +21,26 @@ export default function Orders() {
 
     const fetchOrders = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/orders/user/${phone}`);
-        if (!res.ok) throw new Error("Failed to fetch orders");
+        const token = localStorage.getItem("userToken");
+        const res = await fetch(`${API_BASE_URL}/api/orders/user/${phone}`, {
+          headers: { "Authorization": `Bearer ${token}` }
+        });
+        if (!res.ok) {
+          if (res.status === 401) throw new Error("Your session has expired. Please sign in again.");
+          throw new Error("Failed to fetch orders");
+        }
         const resData = await res.json();
         setOrders(resData.data || []);
       } catch (err) {
         console.error(err);
-        setError("Unable to load orders. Please try again.");
+        if (err.message.includes("session")) {
+          alert(err.message);
+          localStorage.removeItem("userToken");
+          localStorage.removeItem("towncoffee-user");
+          navigate("/menu");
+        } else {
+          setError("Unable to load orders. Please try again.");
+        }
       } finally {
         setLoading(false);
       }
