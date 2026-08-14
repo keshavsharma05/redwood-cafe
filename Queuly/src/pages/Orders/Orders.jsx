@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import API_BASE_URL from "../../config";
+import Preloader from "../../components/Preloader/Preloader";
 import "./Orders.css";
 
 const ACTIVE_STATUSES = ["scheduled", "confirmed", "inbox", "preparing", "ready"];
@@ -60,12 +61,7 @@ export default function Orders() {
   }, [phone, navigate]);
 
   if (loading) {
-    return (
-      <div className="orders-page-loading">
-        <div className="loader-spin"></div>
-        <p>Checking active orders...</p>
-      </div>
-    );
+    return <Preloader />;
   }
 
   return (

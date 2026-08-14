@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import API_BASE_URL from "../../config";
 import "./OrderHistory.css";
 import "../../components/AuthModal/AuthModal.css";
+import Preloader from "../../components/Preloader/Preloader";
 
 /* ── helpers ─────────────────────────────────────── */
 
@@ -232,7 +233,7 @@ export default function OrderHistory() {
   }), [orders]);
 
   if (loading) {
-    return <div className="oh-loader"><div className="oh-spinner" /><p>Retrieving your orders…</p></div>;
+    return <Preloader />;
   }
 
   return (
