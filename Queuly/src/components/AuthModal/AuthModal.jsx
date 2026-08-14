@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './AuthModal.css';
+import API_BASE_URL from "../../config";
 
 export default function AuthModal({ isOpen, onClose }) {
   const [mode, setMode] = useState('login'); // 'login' or 'signup'
@@ -7,6 +8,7 @@ export default function AuthModal({ isOpen, onClose }) {
   const [phone, setPhone] = useState('');
   const [fullName, setFullName] = useState('');
   const [otp, setOtp] = useState('');
+  const [receivedOtp, setReceivedOtp] = useState('');
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -18,13 +20,11 @@ export default function AuthModal({ isOpen, onClose }) {
     setPhone('');
     setFullName('');
     setOtp('');
+    setReceivedOtp('');
     setError(null);
     setLoading(false);
     onClose();
   };
-
-  const generatedEmail = `${phone.trim()}@redwood.local`;
-  const generatedPassword = `RedwoodAuth_${phone.trim()}!`;
 
   const handleContinue = async (e) => {
     e.preventDefault();
@@ -43,33 +43,24 @@ export default function AuthModal({ isOpen, onClose }) {
       return;
     }
 
-    if (mode === 'login') {
-      try {
-        const res = await fetch("http://localhost:5050/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: generatedEmail, password: generatedPassword })
-        });
-        const data = await res.json();
-        
-        if (res.ok && data.success) {
-          // User exists! Proceed to OTP
-          window.__tempUserData = data.data; 
-          setStep(2);
-        } else {
-          // User not found
-          setError("Account not found. Please sign up.");
-          setMode('signup');
-        }
-      } catch (err) {
-        setError("Network error connecting to backend.");
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/auth/request-otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone })
+      });
+      const data = await res.json();
+      
+      if (res.ok && data.success) {
+        setReceivedOtp(data.data.demoOtp);
+        setStep(2);
+      } else {
+        setError(data.message || "Failed to request OTP.");
       }
-      setLoading(false);
-    } else {
-      // Signup mode: just proceed to OTP step first
-      setStep(2);
-      setLoading(false);
+    } catch (err) {
+      setError("Network error connecting to backend.");
     }
+    setLoading(false);
   };
 
   const handleVerify = async (e) => {
@@ -83,42 +74,27 @@ export default function AuthModal({ isOpen, onClose }) {
 
     setLoading(true);
     
-    // Simulate OTP network delay
-    setTimeout(async () => {
-      if (mode === 'login') {
-        const uName = window.__tempUserData?.name || phone;
-        localStorage.setItem("userToken", window.__tempUserData?.token || "dummy");
-        localStorage.setItem("userName", uName);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/auth/verify-otp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: fullName, phone, otp })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        localStorage.setItem("userToken", data.data.token);
+        localStorage.setItem("userName", data.data.name);
         localStorage.setItem("userPhone", phone);
-        localStorage.setItem("towncoffee-user", JSON.stringify({ phone, name: uName }));
+        localStorage.setItem("towncoffee-user", JSON.stringify({ phone, name: data.data.name }));
         window.dispatchEvent(new Event("auth-change"));
         resetStateAndClose();
       } else {
-        // Mode is signup, now register in the database
-        try {
-          const res = await fetch("http://localhost:5050/api/auth/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: fullName, phone, email: generatedEmail, password: generatedPassword })
-          });
-          const data = await res.json();
-          if (res.ok && data.success) {
-            localStorage.setItem("userToken", data.data.token);
-            localStorage.setItem("userName", data.data.name);
-            localStorage.setItem("userPhone", phone);
-            localStorage.setItem("towncoffee-user", JSON.stringify({ phone, name: data.data.name }));
-            window.dispatchEvent(new Event("auth-change"));
-            resetStateAndClose();
-          } else {
-            setError(data.message || "Account already exists with this number.");
-            setStep(1); // Go back to fix number
-          }
-        } catch (err) {
-          setError("Network error connecting to backend.");
-        }
+        setError(data.message || "Invalid OTP");
       }
-      setLoading(false);
-    }, 1000);
+    } catch (err) {
+      setError("Network error connecting to backend.");
+    }
+    setLoading(false);
   };
 
   return (
@@ -142,8 +118,14 @@ export default function AuthModal({ isOpen, onClose }) {
             <>
               <h2 className="auth-title">Verify your number</h2>
               <p className="auth-subtitle">
-                We've sent a 6-digit code to +91 {phone}
+                We've generated a code for +91 {phone}
               </p>
+              {receivedOtp && (
+                <div style={{ background: '#fef3c7', padding: '12px', borderRadius: '8px', margin: '16px 0', textAlign: 'center', border: '1px solid #d97706' }}>
+                  <span style={{ fontSize: '12px', color: '#d97706', fontWeight: 'bold', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>Demo OTP — No SMS will be sent</span>
+                  <strong style={{ fontSize: '28px', letterSpacing: '8px', color: '#2c1f14' }}>{receivedOtp}</strong>
+                </div>
+              )}
             </>
           )}
         </div>
@@ -228,7 +210,7 @@ export default function AuthModal({ isOpen, onClose }) {
           ) : (
             <>
               <p>Didn't receive the code?</p>
-              <button disabled={loading} onClick={() => { setOtp(''); setError(null); /* resend logic */}}>Resend</button>
+              <button disabled={loading} type="button" onClick={handleContinue}>Resend Demo OTP</button>
             </>
           )}
         </div>

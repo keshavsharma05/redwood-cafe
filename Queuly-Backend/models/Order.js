@@ -30,6 +30,9 @@ userDelayUsed: {
     items: [
       {
         itemId: String,
+        title: String,
+        price: Number,
+        image: String,
         qty: Number,
       },
     ],

@@ -127,6 +127,12 @@ const Login = () => {
           </button>
         </form>
 
+        <div className="admin-demo-credentials" style={{ marginTop: '24px', padding: '16px', background: '#fef3c7', borderRadius: '8px', border: '1px solid #d97706', textAlign: 'center' }}>
+          <h4 style={{ margin: '0 0 8px 0', color: '#d97706', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px' }}>Demo Admin Access</h4>
+          <p style={{ margin: '0', fontSize: '14px', color: '#2c1f14', fontFamily: 'monospace' }}><strong>Email:</strong> admin@towncoffee.com</p>
+          <p style={{ margin: '4px 0 0 0', fontSize: '14px', color: '#2c1f14', fontFamily: 'monospace' }}><strong>Password:</strong> admin123</p>
+        </div>
+
         <div className="admin-login-footer">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>

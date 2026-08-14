@@ -116,9 +116,13 @@ export default function Billing() {
     }
 
     try {
+      const token = localStorage.getItem("userToken");
       const response = await fetch(`${API_BASE_URL}/api/orders/create`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        },
         body: JSON.stringify({
           orderType: activeMode,
           tableNumber: activeMode === "arrived" ? tableNumber : null,
@@ -501,12 +505,27 @@ export default function Billing() {
                     </div>
                   </div>
 
-                  <button className="auth-submit-btn" disabled={!name || !phone} onClick={() => { 
-                    setOtpSent(true); 
-                    const code = Math.floor(1000 + Math.random() * 9000);
-                    setOtp(""); 
-                    alert(`[DEMO ONLY] Your OTP is: ${code}`); 
-                    window._currentOtp = String(code); 
+                  <button className="auth-submit-btn" disabled={!name || !phone || isProcessing} onClick={async () => { 
+                    setIsProcessing(true);
+                    try {
+                      const res = await fetch(`${API_BASE_URL}/api/auth/request-otp`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ phone })
+                      });
+                      const data = await res.json();
+                      if (res.ok && data.success) {
+                        setOtpSent(true); 
+                        setOtp(""); 
+                        window._currentOtp = data.data.demoOtp;
+                        alert(`[DEMO ONLY] Your OTP is: ${data.data.demoOtp}`);
+                      } else {
+                        alert(data.message || "Failed to request OTP");
+                      }
+                    } catch(err) {
+                      alert("Network error");
+                    }
+                    setIsProcessing(false);
                   }}>
                     SEND VERIFICATION OTP
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
@@ -522,12 +541,31 @@ export default function Billing() {
                     </div>
                   </div>
                   
-                  <button className="auth-submit-btn" disabled={otp.length < 4 || isProcessing} onClick={() => {
-                    if (otp === window._currentOtp) {
-                      handleConfirmPay();
-                    } else {
-                      alert("Invalid OTP! Try again.");
+                  <button className="auth-submit-btn" disabled={otp.length < 6 || isProcessing} onClick={async () => {
+                    setIsProcessing(true);
+                    try {
+                      const res = await fetch(`${API_BASE_URL}/api/auth/verify-otp`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ name, phone, otp })
+                      });
+                      const data = await res.json();
+                      if (res.ok && data.success) {
+                        localStorage.setItem("userToken", data.data.token);
+                        localStorage.setItem("userName", data.data.name);
+                        localStorage.setItem("userPhone", phone);
+                        localStorage.setItem("towncoffee-user", JSON.stringify({ phone, name: data.data.name }));
+                        window.dispatchEvent(new Event("auth-change"));
+                        setIsVerified(true);
+                        setShowVerifyModal(false);
+                        handleConfirmPay();
+                      } else {
+                        alert(data.message || "Invalid OTP");
+                      }
+                    } catch(err) {
+                      alert("Network error");
                     }
+                    setIsProcessing(false);
                   }}>
                     {isProcessing ? "VERIFYING..." : "CONFIRM & PROCEED"}
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>

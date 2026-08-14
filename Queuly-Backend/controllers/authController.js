@@ -7,41 +7,87 @@ const generateToken = (id) => {
   });
 };
 
-// @desc    Register a new user
-export const registerUser = async (req, res, next) => {
-  const { name, email, phone, password } = req.body;
+const otpStore = new Map();
+
+// @desc    Request Demo OTP
+export const requestOtp = async (req, res, next) => {
+  const { phone } = req.body;
+  if (!phone || phone.length < 10) {
+    res.status(400);
+    return next(new Error("Valid phone number is required"));
+  }
+
+  // Generate 6-digit OTP
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  
+  // Store OTP with 5 min expiration
+  otpStore.set(phone, {
+    otp,
+    expiresAt: Date.now() + 5 * 60 * 1000
+  });
+
+  // Return the OTP in the response for demo purposes
+  res.json({
+    success: true,
+    message: "OTP generated",
+    data: {
+      phone,
+      demoOtp: otp
+    }
+  });
+};
+
+// @desc    Verify OTP & Login/Signup
+export const verifyOtp = async (req, res, next) => {
+  const { phone, otp, name } = req.body;
+
+  if (!phone || !otp) {
+    res.status(400);
+    return next(new Error("Phone and OTP are required"));
+  }
+
+  const storedData = otpStore.get(phone);
+  
+  if (!storedData) {
+    res.status(400);
+    return next(new Error("OTP expired or not requested"));
+  }
+
+  if (storedData.otp !== otp || Date.now() > storedData.expiresAt) {
+    res.status(401);
+    return next(new Error("Invalid or expired OTP"));
+  }
+
+  // Valid OTP, remove it
+  otpStore.delete(phone);
 
   try {
-    const userExists = await User.findOne({ $or: [{ email }, { phone }] });
+    let user = await User.findOne({ phone });
 
-    if (userExists) {
-      res.status(400);
-      throw new Error("User already exists with this email or phone");
-    }
-
-    const user = await User.create({
-      name,
-      email,
-      phone,
-      password,
-    });
-
-    if (user) {
-      res.status(201).json({
-        success: true,
-        data: {
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          phone: user.phone,
-          isAdmin: user.isAdmin,
-          token: generateToken(user._id),
-        },
+    if (!user) {
+      // Create user with dummy email/password to satisfy schema
+      const generatedEmail = `${phone}@redwood.local`;
+      const generatedPassword = `Auth_${phone}_${Date.now()}`;
+      
+      user = await User.create({
+        name: name || "Guest User",
+        email: generatedEmail,
+        phone,
+        password: generatedPassword,
       });
-    } else {
-      res.status(400);
-      throw new Error("Invalid user data");
     }
+
+    res.json({
+      success: true,
+      data: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        isAdmin: user.isAdmin,
+        token: generateToken(user._id),
+      },
+    });
   } catch (error) {
     next(error);
   }

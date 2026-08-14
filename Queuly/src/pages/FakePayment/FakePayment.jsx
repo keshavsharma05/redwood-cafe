@@ -13,7 +13,10 @@ export default function FakePayment() {
 
   useEffect(() => {
     if (!orderId) return;
-    fetch(`${API_BASE_URL}/api/orders/${orderId}`)
+    const token = localStorage.getItem("userToken");
+    fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
+      headers: { "Authorization": `Bearer ${token}` }
+    })
       .then(res => res.json())
       .then(resData => setOrderData(resData.data))
       .catch(console.error);
@@ -22,9 +25,13 @@ export default function FakePayment() {
   const handlePay = () => {
     setStatus("processing");
     setTimeout(async () => {
+      const token = localStorage.getItem("userToken");
       await fetch(`${API_BASE_URL}/api/payments/fake/confirm`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
         body: JSON.stringify({ orderId, status: "paid" }),
       });
       setStatus("success");
@@ -44,13 +51,7 @@ export default function FakePayment() {
   return (
     <div className="fakepay-page">
       <div className="fakepay-logo-header">
-        <div className="fakepay-logo-circle">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2c1f14" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20V6"/><path d="M7 16l5-3 5 3"/><path d="M8 13l4-3 4 3"/><path d="M9.5 10l2.5-2.5L14.5 10"/><path d="M11 7l1-1 1 1"/></svg>
-        </div>
-        <div className="fakepay-logo-text">
-          <span className="logo-title">REDWOOD</span>
-          <span className="logo-sub"><span className="line"></span>CAFE<span className="line"></span></span>
-        </div>
+        <img src="/logo.png" alt="Redwood Cafe Logo" style={{ width: "80px", height: "auto", display: "block", margin: "0 auto" }} />
       </div>
 
       <div className="fakepay-single-card">
@@ -67,10 +68,9 @@ export default function FakePayment() {
 
             <div className="fakepay-payment-section">
               <div className="payment-section-header">
-                <span className="section-title">ONLINE PAYMENT</span>
-                <span className="section-secure">
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                  Secure & Encrypted
+                <span className="section-title">DEMO PAYMENT GATEWAY</span>
+                <span className="section-secure" style={{ color: "#d97706", backgroundColor: "#fef3c7", padding: "4px 8px", borderRadius: "12px", fontSize: "0.75rem", fontWeight: "600" }}>
+                  Simulation Only
                 </span>
               </div>
 
@@ -139,7 +139,7 @@ export default function FakePayment() {
 
       <div className="fakepay-secure-footer">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-        Your payment is secure and encrypted
+        Simulation only. No real payment will be processed.
       </div>
     </div>
   );

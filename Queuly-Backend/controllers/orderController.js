@@ -11,11 +11,12 @@ export const createOrder = async (req, res, next) => {
       tableNumber, 
       arrivalTime, 
       items, 
-      accountName,
-      accountPhone,
       pickerName,
       pickerPhone
     } = req.body;
+
+    const accountName = req.user.name;
+    const accountPhone = req.user.phone;
 
     if (!items || items.length === 0) {
       res.status(400);
@@ -31,12 +32,27 @@ export const createOrder = async (req, res, next) => {
 
     // Calculate real total and preparation time
     let totalPrepTime = 0;
-    const total = items.reduce((sum, item) => {
+    const itemsSnapshot = items.map(item => {
+      if (typeof item.qty !== 'number' || item.qty <= 0 || !Number.isInteger(item.qty)) {
+        res.status(400);
+        throw new Error("Invalid quantity");
+      }
       const menuItem = menuMap[item.itemId];
-      const price = menuItem?.price || 0;
-      totalPrepTime = Math.max(totalPrepTime, menuItem?.prepTime || 5); // Use max prep time as bottleneck
-      return sum + price * item.qty;
-    }, 0);
+      if (!menuItem) {
+        res.status(400);
+        throw new Error(`Menu item not found: ${item.itemId}`);
+      }
+      totalPrepTime = Math.max(totalPrepTime, menuItem.prepTime || 5);
+      return {
+        itemId: item.itemId,
+        title: menuItem.title,
+        price: menuItem.price,
+        image: menuItem.image || "",
+        qty: item.qty
+      };
+    });
+
+    const total = itemsSnapshot.reduce((sum, item) => sum + (item.price * item.qty), 0);
 
     let scheduledTime = null;
     let prepStartTime = null;
@@ -79,7 +95,7 @@ export const createOrder = async (req, res, next) => {
       orderType,
       tableNumber,
       arrivalTime,
-      items,
+      items: itemsSnapshot,
       accountName,
       accountPhone,
       pickerName: pickerName || accountName,
@@ -110,6 +126,11 @@ export const confirmOrder = async (req, res, next) => {
       throw new Error("Order not found");
     }
 
+    if (order.accountPhone !== req.user.phone && !req.user.isAdmin) {
+      res.status(403);
+      throw new Error("Not authorized to confirm this order");
+    }
+
     if (order.status !== "scheduled") {
       res.status(400);
       throw new Error("Only scheduled orders can be confirmed");
@@ -135,6 +156,11 @@ export const delayOrder = async (req, res, next) => {
     if (!order) {
       res.status(404);
       throw new Error("Order not found");
+    }
+
+    if (order.accountPhone !== req.user.phone && !req.user.isAdmin) {
+      res.status(403);
+      throw new Error("Not authorized to delay this order");
     }
 
     // Only scheduled/inbox allowed
@@ -231,6 +257,11 @@ export const userDelayOrder = async (req, res, next) => {
     if (!order) {
       res.status(404);
       throw new Error("Order not found");
+    }
+
+    if (order.accountPhone !== req.user.phone && !req.user.isAdmin) {
+      res.status(403);
+      throw new Error("Not authorized to modify this order");
     }
 
     // ❗ User delay only once
@@ -334,6 +365,11 @@ export const getOrderById = async (req, res, next) => {
       throw new Error("Order not found");
     }
 
+    if (order.accountPhone !== req.user.phone && !req.user.isAdmin) {
+      res.status(403);
+      throw new Error("Not authorized to view this order");
+    }
+
     const menuItems = await MenuItem.find();
     const menuMap = {};
     menuItems.forEach(m => {
@@ -343,9 +379,9 @@ export const getOrderById = async (req, res, next) => {
     const orderObj = order.toObject();
     orderObj.items = orderObj.items.map(i => ({
       ...i,
-      title: menuMap[i.itemId]?.title || "Unknown Item",
-      price: menuMap[i.itemId]?.price || 0,
-      image: menuMap[i.itemId]?.image || "",
+      title: i.title || menuMap[i.itemId]?.title || "Unknown Item",
+      price: i.price !== undefined ? i.price : (menuMap[i.itemId]?.price || 0),
+      image: i.image || menuMap[i.itemId]?.image || "",
     }));
 
     res.json({
@@ -391,8 +427,9 @@ export const getAllOrders = async (req, res, next) => {
         ...orderObj,
         items: orderObj.items.map(i => ({
           ...i,
-          title: menuMap[i.itemId]?.title || "Unknown Item",
-          price: menuMap[i.itemId]?.price || 0,
+          title: i.title || menuMap[i.itemId]?.title || "Unknown Item",
+          price: i.price !== undefined ? i.price : (menuMap[i.itemId]?.price || 0),
+          image: i.image || menuMap[i.itemId]?.image || "",
         })),
       };
     });
@@ -434,6 +471,11 @@ export const getHistoryDays = async (req, res, next) => {
 export const getOrdersByPhone = async (req, res, next) => {
   try {
     const { phone } = req.params;
+    if (phone !== req.user.phone && !req.user.isAdmin) {
+      res.status(403);
+      throw new Error("Not authorized to view orders for this phone");
+    }
+
     const orders = await Order.find({ accountPhone: phone })
       .sort({ createdAt: -1 });
 
@@ -449,9 +491,9 @@ export const getOrdersByPhone = async (req, res, next) => {
         ...orderObj,
         items: orderObj.items.map(i => ({
           ...i,
-          title: menuMap[i.itemId]?.title || "Unknown Item",
-          price: menuMap[i.itemId]?.price || 0,
-          image: menuMap[i.itemId]?.image || "",
+          title: i.title || menuMap[i.itemId]?.title || "Unknown Item",
+          price: i.price !== undefined ? i.price : (menuMap[i.itemId]?.price || 0),
+          image: i.image || menuMap[i.itemId]?.image || "",
         })),
       };
     });
