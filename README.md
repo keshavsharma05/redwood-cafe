@@ -195,18 +195,3 @@ redwood-cafe/
 - 🐙 **GitHub Repo:** [https://github.com/keshavsharma09/redwood-cafe](https://github.com/keshavsharma09/redwood-cafe)
 
 ---
-
-## 🚀 Upcoming Improvements
-
-- [ ] Real payment gateway integration
-- [ ] Real SMS OTP integration
-- [ ] Analytics & sales dashboard
-- [ ] Real-time notifications with WebSockets
-
----
-
-<div align="center">
-
-Made with ❤️ by **Keshav Sharma**
-
-</div>
