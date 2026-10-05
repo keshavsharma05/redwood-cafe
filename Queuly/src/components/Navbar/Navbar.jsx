@@ -90,21 +90,23 @@ export default function Navbar({ onOpenAuth }) {
               Testimonials
             </button>
           </li>
-          <li>
-            <button className="app-nav-btn" onClick={() => { setMenuOpen(false); navigate("/billing"); }} style={{ display: 'flex', alignItems: 'center', padding: "8px 0" }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2c1f14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-              <span style={{ fontSize: "12px", fontWeight: 700, marginLeft: "6px", color: "#2c1f14" }}>
-                Cart ({JSON.parse(localStorage.getItem('towncoffee-cart') || '{}') ? Object.keys(JSON.parse(localStorage.getItem('towncoffee-cart') || '{}')).length : 0})
-              </span>
-            </button>
-          </li>
+          {location.pathname !== "/" && (
+            <li>
+              <button className="app-nav-btn" onClick={() => { setMenuOpen(false); navigate("/billing"); }} style={{ display: 'flex', alignItems: 'center', padding: "8px 0" }}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2c1f14" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                <span style={{ fontSize: "12px", fontWeight: 700, marginLeft: "6px", color: "#2c1f14" }}>
+                  Cart ({JSON.parse(localStorage.getItem('towncoffee-cart') || '{}') ? Object.keys(JSON.parse(localStorage.getItem('towncoffee-cart') || '{}')).length : 0})
+                </span>
+              </button>
+            </li>
+          )}
           {!isLoggedIn ? (
             <li>
               <button className="app-nav-btn" onClick={() => { setMenuOpen(false); onOpenAuth(); }}>
                 Sign Up
               </button>
             </li>
-          ) : (
+          ) : location.pathname !== "/" ? (
             <li className="profile-card-wrapper" style={{ position: 'relative' }}>
               <button 
                 className="app-nav-btn profile-card-btn" 
@@ -141,7 +143,7 @@ export default function Navbar({ onOpenAuth }) {
                 </div>
               )}
             </li>
-          )}
+          ) : null}
           <li>
             <button
               className="app-nav-btn app-nav-btn--cta"
