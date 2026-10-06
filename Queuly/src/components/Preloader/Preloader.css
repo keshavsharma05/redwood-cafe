@@ -1,111 +1,694 @@
+/* =========================================
+   REDWOOD CAFE
+   PREMIUM PRELOADER
+========================================= */
+
 .preloader-container {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: #FDFCF9;
+  inset: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  overflow: hidden;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+
+  /* Hero-section-inspired background */
+  background:
+    radial-gradient(
+      circle at 72% 18%,
+      rgba(255, 250, 241, 0.55) 0%,
+      rgba(238, 224, 205, 0.22) 28%,
+      transparent 55%
+    ),
+    linear-gradient(
+      135deg,
+      #c9b69e 0%,
+      #d8c8b4 42%,
+      #cdbba4 72%,
+      #bca88f 100%
+    );
+
+  color: #2c1f14;
+
+  z-index: 99999;
+
+  isolation: isolate;
+}
+
+
+/* =========================================
+   SUBTLE PAPER / MATERIAL TEXTURE
+========================================= */
+
+.preloader-texture {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.17;
+
+  background-image:
+    radial-gradient(
+      rgba(68, 47, 31, 0.12) 0.6px,
+      transparent 0.7px
+    );
+
+  background-size: 5px 5px;
+
+  mix-blend-mode: multiply;
+
+  z-index: -2;
+}
+
+
+/* =========================================
+   SOFT LIGHT
+========================================= */
+
+.preloader-light {
+  position: absolute;
+  inset: -20%;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 74% 16%,
+      rgba(255, 249, 238, 0.72) 0%,
+      rgba(255, 244, 226, 0.30) 22%,
+      transparent 48%
+    );
+
+  filter: blur(35px);
+
+  z-index: -1;
+
+  animation: ambientLight 9s ease-in-out infinite alternate;
+}
+
+
+@keyframes ambientLight {
+
+  0% {
+    transform: translate3d(-2%, -1%, 0);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translate3d(2%, 2%, 0);
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================
+   TOP LEFT
+========================================= */
+
+.preloader-top-left {
+
+  position: absolute;
+
+  top: 52px;
+  left: 64px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 26px;
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.42em;
+
+  color: rgba(57, 40, 27, 0.78);
+
+  white-space: nowrap;
+}
+
+
+.small-line {
+
+  width: 30px;
+  height: 1px;
+
+  background: rgba(57, 40, 27, 0.62);
+}
+
+
+/* =========================================
+   TOP RIGHT
+========================================= */
+
+.preloader-top-right {
+
+  position: absolute;
+
+  top: 52px;
+  right: 64px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 20px;
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.4em;
+
+  color: rgba(57, 40, 27, 0.72);
+}
+
+
+.slash {
+  opacity: 0.4;
+}
+
+
+/* =========================================
+   LEFT VERTICAL LABEL
+========================================= */
+
+.preloader-side-label {
+
+  position: absolute;
+
+  left: 64px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  height: 320px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  opacity: 0.62;
+}
+
+
+.side-line {
+
+  width: 1px;
+  height: 85px;
+
+  background: rgba(57, 40, 27, 0.55);
+}
+
+
+.vertical-text {
+
+  writing-mode: vertical-rl;
+
+  transform: rotate(180deg);
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 0.45em;
+
+  color: #3a291d;
+}
+
+
+/* =========================================
+   CENTER CONTENT
+========================================= */
+
+.preloader-content {
+
+  position: relative;
+
+  width: min(600px, 80vw);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transform: translateY(-8px);
+
+  animation:
+    contentReveal 1.1s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ) forwards;
+}
+
+
+@keyframes contentReveal {
+
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-8px);
+  }
+
+}
+
+
+/* =========================================
+   LOGO
+   IMPORTANT:
+   KEEP ORIGINAL DARK LOGO
+========================================= */
+
+.brand-wrapper {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 78px;
+}
+
+
+.preloader-logo {
+
+  width: 300px;
+
+  height: auto;
+
+  display: block;
+
+  object-fit: contain;
+
+  /*
+    DO NOT INVERT THE LOGO.
+    Your original logo is already dark.
+  */
+
+  filter: none;
+
+  opacity: 1;
+
+  animation: logoBreathing 4.5s ease-in-out infinite;
+}
+
+
+@keyframes logoBreathing {
+
+  0%,
+  100% {
+    transform: scale(0.985);
+    opacity: 0.92;
+  }
+
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================
+   LOADING AREA
+========================================= */
+
+.loading-area {
+
+  width: 390px;
+
+  max-width: 80vw;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+
+/* =========================================
+   LOADING MESSAGE
+========================================= */
+
+.loading-message {
+
+  margin: 0 0 20px;
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 9px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.45em;
+
+  text-transform: uppercase;
+
+  color: rgba(57, 40, 27, 0.68);
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================
+   PROGRESS BAR
+========================================= */
+
+.progress-row {
+
+  width: 100%;
+
+  height: 2px;
+
+  position: relative;
+
   overflow: hidden;
 }
 
-.preloader-bg-overlay {
+
+.progress-track {
+
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: radial-gradient(circle at center, rgba(141, 91, 58, 0.05) 0%, transparent 60%);
-  pointer-events: none;
+
+  inset: 0;
+
+  background: rgba(67, 47, 31, 0.15);
+
+  overflow: hidden;
 }
 
-.preloader-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 1;
-  animation: contentFadeIn 0.8s ease-out;
-}
 
-@keyframes contentFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+.progress-fill {
 
-.preloader-spinner-wrapper {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 32px;
-}
-
-.preloader-center-logo {
-  position: absolute;
-  width: 50px;
-  height: auto;
-  opacity: 0.9;
-  animation: logoBreathe 3s ease-in-out infinite alternate;
-}
-
-@keyframes logoBreathe {
-  0% { transform: scale(0.95); opacity: 0.8; }
-  100% { transform: scale(1.05); opacity: 1; }
-}
-
-.preloader-spinner {
-  width: 100%;
   height: 100%;
-  animation: spin 2s linear infinite;
+
+  background: #392719;
+
+  box-shadow:
+    0 0 8px rgba(58, 39, 25, 0.18);
+
+  transition:
+    width 0.18s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
 }
 
-.spinner-track {
-  fill: transparent;
-  stroke: rgba(44, 31, 20, 0.08);
-  stroke-width: 4;
-}
 
-.spinner-path {
-  fill: transparent;
-  stroke: #4B382A;
-  stroke-width: 4;
-  stroke-linecap: round;
-  stroke-dasharray: 200;
-  stroke-dashoffset: 140;
-  animation: spinnerDash 2.5s ease-in-out infinite;
-}
+/* =========================================
+   PERCENTAGE
+========================================= */
 
-@keyframes spin {
-  100% { transform: rotate(360deg); }
-}
+.progress-number {
 
-@keyframes spinnerDash {
-  0% { stroke-dasharray: 10, 300; stroke-dashoffset: 0; }
-  50% { stroke-dasharray: 140, 300; stroke-dashoffset: -40; }
-  100% { stroke-dasharray: 10, 300; stroke-dashoffset: -280; }
-}
+  margin-top: 13px;
 
-.preloader-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 24px;
-  font-weight: 700;
-  color: #2c1f14;
-  margin: 0 0 12px;
-  letter-spacing: 0.05em;
-}
-
-.preloader-msg {
   font-family: 'Inter', sans-serif;
-  font-size: 14px;
+
+  font-size: 9px;
+
   font-weight: 500;
-  color: #7C746E;
-  margin: 0;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  animation: pulseText 2s ease-in-out infinite;
+
+  letter-spacing: 0.35em;
+
+  color: rgba(57, 40, 27, 0.68);
+
+  transform: translateX(0.18em);
 }
 
-@keyframes pulseText {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+
+/* =========================================
+   SKIP
+========================================= */
+
+.preloader-skip {
+
+  position: absolute;
+
+  right: 64px;
+
+  bottom: 48px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  font-family: 'Inter', sans-serif;
+
+  font-size: 9px;
+
+  letter-spacing: 0.38em;
+
+  color: rgba(57, 40, 27, 0.76);
+
+  cursor: pointer;
+}
+
+
+.skip-line {
+
+  width: 26px;
+
+  height: 1px;
+
+  background: rgba(57, 40, 27, 0.65);
+
+  transition:
+    width 0.3s ease;
+}
+
+
+.preloader-skip:hover .skip-line {
+  width: 42px;
+}
+
+
+/* =========================================
+   LARGE DESKTOP
+========================================= */
+
+@media (min-width: 1600px) {
+
+  .preloader-top-left {
+    top: 60px;
+    left: 88px;
+  }
+
+  .preloader-top-right {
+    top: 60px;
+    right: 88px;
+  }
+
+  .preloader-side-label {
+    left: 68px;
+  }
+
+  .preloader-skip {
+    right: 88px;
+    bottom: 58px;
+  }
+
+  .preloader-logo {
+    width: 320px;
+  }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+
+  .preloader-top-left {
+    top: 35px;
+    left: 32px;
+  }
+
+  .preloader-top-right {
+    top: 35px;
+    right: 32px;
+  }
+
+  .preloader-side-label {
+    left: 30px;
+    height: 240px;
+  }
+
+  .preloader-skip {
+    right: 32px;
+    bottom: 32px;
+  }
+
+  .brand-wrapper {
+    margin-bottom: 65px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .preloader-container {
+
+    background:
+      radial-gradient(
+        circle at 70% 20%,
+        rgba(255, 249, 237, 0.5),
+        transparent 50%
+      ),
+      linear-gradient(
+        145deg,
+        #c7b39b,
+        #d8c7b1,
+        #c2ae96
+      );
+  }
+
+
+  .preloader-top-left {
+
+    top: 28px;
+
+    left: 24px;
+
+    gap: 14px;
+
+    font-size: 8px;
+
+    letter-spacing: 0.3em;
+  }
+
+
+  .small-line {
+    width: 18px;
+  }
+
+
+  .preloader-top-right {
+    display: none;
+  }
+
+
+  .preloader-side-label {
+    display: none;
+  }
+
+
+  .preloader-content {
+
+    width: 90vw;
+
+    transform: translateY(-12px);
+  }
+
+
+  .brand-wrapper {
+
+    margin-bottom: 60px;
+  }
+
+
+  .preloader-logo {
+
+    width: 230px;
+
+    filter: none;
+  }
+
+
+  .loading-area {
+
+    width: 290px;
+
+    max-width: 80vw;
+  }
+
+
+  .loading-message {
+
+    font-size: 7px;
+
+    letter-spacing: 0.34em;
+
+    margin-bottom: 18px;
+  }
+
+
+  .progress-number {
+
+    font-size: 8px;
+
+    margin-top: 12px;
+  }
+
+
+  .preloader-skip {
+
+    right: 24px;
+
+    bottom: 27px;
+
+    font-size: 8px;
+
+    gap: 12px;
+  }
+
+}
+
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .preloader-light,
+  .preloader-logo,
+  .preloader-content {
+
+    animation: none;
+  }
+
+  .progress-fill {
+
+    transition: none;
+  }
+
 }

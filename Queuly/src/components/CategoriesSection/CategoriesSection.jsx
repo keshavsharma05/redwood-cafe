@@ -92,10 +92,6 @@ export default function Categories() {
         y: 50, opacity: 0, scale: 0.94, duration: 0.9,
         stagger: 0.12, ease: "back.out(1.2)",
       });
-      gsap.from(".cat-img-wrap img", {
-        scrollTrigger: { trigger: ".cat-grid", start: "top 80%", once: true },
-        scale: 1.14, duration: 1.3, ease: "power2.out", stagger: 0.12,
-      });
       gsap.from(".cat-footer-link", {
         scrollTrigger: { trigger: ".cat-footer", start: "top 95%", once: true },
         y: 18, opacity: 0, duration: 0.6, ease: "power3.out",
@@ -133,7 +129,12 @@ export default function Categories() {
             >
               {/* Full-bleed image */}
               <div className="cat-img-wrap">
-                <img src={cat.image} alt={cat.alt} />
+                <img
+  src={cat.image}
+  alt={cat.alt}
+  loading="lazy"
+  decoding="async"
+/>
               </div>
 
               {/* Gradient overlay */}

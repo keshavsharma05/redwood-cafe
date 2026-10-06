@@ -141,15 +141,64 @@ export default function Menu({ onOpenAuth }) {
     return <Preloader />;
   }
 
-  if (error) {
-    return (
-      <div className="menu-error-container">
-        <h2>Unable to load menu</h2>
-        <p>{error}</p>
-        <button onClick={() => window.location.reload()}>Retry</button>
+if (error) {
+  return (
+    <div className="menu-error-page">
+      <div className="menu-error-card">
+
+        <div className="menu-error-mark">
+  <img src="/logo.png" alt="Redwood Cafe" />
+</div>
+
+        <span className="menu-error-eyebrow">
+          TEMPORARILY UNAVAILABLE
+        </span>
+
+        <h1 className="menu-error-title">
+          The menu is taking a little break.
+        </h1>
+
+        <p className="menu-error-text">
+          We couldn't load today's menu right now.
+          Give it another moment and we'll have everything
+          back on the table.
+        </p>
+
+        <button
+          className="menu-error-retry"
+          onClick={() => window.location.reload()}
+        >
+          <span>Try again</span>
+
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M20 11a8.1 8.1 0 0 0-15.5-2" />
+            <polyline points="4 4 4 9 9 9" />
+            <path d="M4 13a8.1 8.1 0 0 0 15.5 2" />
+            <polyline points="20 20 20 15 15 15" />
+          </svg>
+        </button>
+
+        <span className="menu-error-note">
+          Your cart is safe. Nothing has been lost.
+        </span>
+
       </div>
-    );
-  }
+
+      <span className="menu-error-ghost" aria-hidden="true">
+        MENU
+      </span>
+    </div>
+  );
+}
 
   return (
     <div className="menu-page" data-hide-global-nav>
