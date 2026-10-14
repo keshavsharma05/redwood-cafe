@@ -2,7 +2,6 @@ import React, { useState, useMemo, useEffect } from "react";
 import "./Menu.css";
 import { useNavigate, useLocation } from "react-router-dom";
 import API_BASE_URL from "../../config";
-import Preloader from "../../components/Preloader/Preloader";
 
 const CATEGORY_META = {
   All: { icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="7" r="2.5"/><circle cx="7" cy="17" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg>, desc: "Our complete culinary collection." },
@@ -137,9 +136,78 @@ export default function Menu({ onOpenAuth }) {
 
   const totalItems = Object.values(quantities).reduce((sum, q) => sum + q, 0);
 
-  if (isLoading) {
-    return <Preloader />;
-  }
+if (isLoading) {
+  return (
+    <div className="menu-page menu-page--loading" data-hide-global-nav>
+      {/* Navbar skeleton */}
+      <nav className="mn-nav menu-skeleton-nav">
+        <div className="skeleton-block skeleton-logo" />
+        <div className="menu-skeleton-nav-links">
+          <div className="skeleton-block skeleton-nav-link" />
+          <div className="skeleton-block skeleton-nav-link" />
+          <div className="skeleton-block skeleton-nav-link" />
+          <div className="skeleton-block skeleton-nav-link" />
+        </div>
+        <div className="menu-skeleton-nav-actions">
+          <div className="skeleton-block skeleton-search" />
+          <div className="skeleton-block skeleton-cart" />
+        </div>
+      </nav>
+
+      {/* Hero skeleton */}
+      <section className="menu-hero-full menu-skeleton-hero">
+        <div className="menu-hero-content">
+          <div className="skeleton-block skeleton-hero-title" />
+          <div className="skeleton-block skeleton-hero-subtitle" />
+        </div>
+      </section>
+
+      <div className="menu-container">
+        {/* Category pills skeleton */}
+        <div className="menu-pills-row menu-skeleton-pills">
+          {[110, 100, 125, 135, 105, 120].map((width, index) => (
+            <div
+              key={index}
+              className="skeleton-block skeleton-pill"
+              style={{ width }}
+            />
+          ))}
+        </div>
+
+        {/* Menu category + item card skeletons */}
+        <div className="menu-sections">
+          {[0, 1, 2].map((section) => (
+            <section className="menu-cat-section" key={section}>
+              <div className="menu-skeleton-heading">
+                <div className="skeleton-block skeleton-category-title" />
+                <div className="skeleton-block skeleton-category-desc" />
+              </div>
+
+              <div className="menu-grid menu-skeleton-grid">
+                {[0, 1, 2, 3].map((card) => (
+                  <div className="menu-card menu-skeleton-card" key={card}>
+                    <div className="skeleton-block menu-skeleton-image" />
+
+                    <div className="menu-skeleton-card-body">
+                      <div className="skeleton-block skeleton-item-title" />
+                      <div className="skeleton-block skeleton-item-desc" />
+                      <div className="skeleton-block skeleton-item-desc skeleton-item-desc--short" />
+
+                      <div className="menu-skeleton-card-footer">
+                        <div className="skeleton-block skeleton-price" />
+                        <div className="skeleton-block skeleton-add-btn" />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 if (error) {
   return (

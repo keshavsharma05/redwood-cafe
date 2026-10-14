@@ -717,6 +717,231 @@
   pointer-events: none;
   user-select: none;
 }
+/* ── MENU SKELETON LOADING ── */
+
+.menu-page--loading {
+  padding-bottom: 60px;
+}
+
+.skeleton-block {
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #e9e2d8;
+  border-radius: 6px;
+}
+
+.skeleton-block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    transparent
+  );
+  animation: menu-skeleton-shimmer 1.45s ease-in-out infinite;
+}
+
+@keyframes menu-skeleton-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Navbar */
+.menu-skeleton-nav {
+  min-height: 73px;
+}
+
+.skeleton-logo {
+  width: 110px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.menu-skeleton-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.skeleton-nav-link {
+  width: 48px;
+  height: 10px;
+  border-radius: 4px;
+}
+
+.menu-skeleton-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.skeleton-search {
+  width: 190px;
+  height: 36px;
+  border-radius: 50px;
+}
+
+.skeleton-cart {
+  width: 76px;
+  height: 34px;
+  border-radius: 50px;
+}
+
+/* Hero */
+.menu-skeleton-hero {
+  background-color: #eee7dc;
+  background-image: none;
+}
+
+.skeleton-hero-title {
+  width: 230px;
+  height: 48px;
+  margin-bottom: 14px;
+  border-radius: 5px;
+}
+
+.skeleton-hero-subtitle {
+  width: 270px;
+  max-width: 80%;
+  height: 14px;
+}
+
+/* Category pills */
+.menu-skeleton-pills {
+  pointer-events: none;
+}
+
+.skeleton-pill {
+  height: 38px;
+  border-radius: 50px;
+}
+
+/* Category heading */
+.menu-skeleton-heading {
+  margin-bottom: 24px;
+}
+
+.skeleton-category-title {
+  width: 175px;
+  height: 23px;
+  margin-bottom: 12px;
+}
+
+.skeleton-category-desc {
+  width: 245px;
+  max-width: 80%;
+  height: 12px;
+}
+
+/* Menu cards */
+.menu-skeleton-grid {
+  overflow: hidden;
+  flex-wrap: nowrap;
+}
+
+.menu-skeleton-card {
+  pointer-events: none;
+  box-shadow: none;
+  border-color: rgba(44, 31, 20, 0.05);
+}
+
+.menu-skeleton-image {
+  width: 45%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.menu-skeleton-card-body {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.skeleton-item-title {
+  width: 90%;
+  height: 15px;
+  margin-bottom: 13px;
+}
+
+.skeleton-item-desc {
+  width: 100%;
+  height: 8px;
+  margin-bottom: 8px;
+}
+
+.skeleton-item-desc--short {
+  width: 68%;
+}
+
+.menu-skeleton-card-footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.skeleton-price {
+  width: 48px;
+  height: 12px;
+}
+
+.skeleton-add-btn {
+  width: 54px;
+  height: 27px;
+  border-radius: 50px;
+}
+
+/* Responsive skeleton */
+@media (max-width: 768px) {
+  .menu-page--loading {
+    padding: 90px 4vw 60px;
+  }
+
+  .menu-skeleton-nav {
+    display: none;
+  }
+
+  .menu-skeleton-hero {
+    height: 50vh;
+  }
+
+  .skeleton-hero-title {
+    width: 190px;
+    height: 38px;
+  }
+
+  .skeleton-hero-subtitle {
+    width: 220px;
+  }
+
+  .menu-skeleton-card {
+    min-width: 260px;
+    max-width: 260px;
+    height: 160px;
+  }
+
+  .menu-skeleton-nav-links,
+  .menu-skeleton-nav-actions {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-block::after {
+    animation: none;
+  }
+}
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .menu-page {
