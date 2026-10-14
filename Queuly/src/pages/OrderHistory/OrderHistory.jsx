@@ -232,9 +232,6 @@ export default function OrderHistory() {
     cancelled: orders.filter((o) => (o.status || "").toLowerCase() === "cancelled").length,
   }), [orders]);
 
-  if (loading) {
-    return <Preloader />;
-  }
 
   return (
     <div className="oh-page">

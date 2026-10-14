@@ -60,9 +60,6 @@ export default function Orders() {
     fetchOrders();
   }, [phone, navigate]);
 
-  if (loading) {
-    return <Preloader />;
-  }
 
   return (
     <div className="orders-page animation-fade">
