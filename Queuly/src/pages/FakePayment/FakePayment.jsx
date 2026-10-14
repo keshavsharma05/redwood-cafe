@@ -3,6 +3,92 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import API_BASE_URL from "../../config";
 import "./FakePayment.css";
 
+function FakePaymentSkeleton() {
+  return (
+    <div
+      className="fakepay-page fakepay-skeleton"
+      aria-label="Loading checkout details"
+      aria-busy="true"
+    >
+      <div className="fakepay-logo-header">
+        <img
+          src="/logo.png"
+          alt="Redwood Cafe Logo"
+          style={{
+            width: "80px",
+            height: "auto",
+            display: "block",
+            margin: "0 auto",
+          }}
+        />
+      </div>
+
+      <div className="fakepay-single-card">
+        {/* Amount */}
+        <div className="fakepay-skeleton-amount">
+          <div className="fp-skeleton-line fp-label fp-shimmer" />
+          <div className="fp-skeleton-line fp-amount fp-shimmer" />
+        </div>
+
+        <div className="fakepay-tree-divider">
+          <div className="fp-skeleton-dot fp-shimmer" />
+        </div>
+
+        {/* Gateway heading */}
+        <div className="fakepay-skeleton-gateway">
+          <div className="fp-skeleton-line fp-gateway-title fp-shimmer" />
+          <div className="fp-skeleton-badge fp-shimmer" />
+        </div>
+
+        {/* UPI accordion */}
+        <div className="fakepay-skeleton-accordion">
+          <div className="fakepay-skeleton-copy">
+            <div className="fp-skeleton-line fp-shimmer" />
+            <div className="fp-skeleton-line fp-short fp-shimmer" />
+          </div>
+          <div className="fp-skeleton-chevron fp-shimmer" />
+        </div>
+
+        {/* UPI options */}
+        <div className="fakepay-skeleton-options">
+          <div className="fakepay-skeleton-option">
+            <div className="fp-skeleton-radio fp-shimmer" />
+            <div className="fakepay-skeleton-copy">
+              <div className="fp-skeleton-line fp-option-title fp-shimmer" />
+              <div className="fp-skeleton-line fp-short fp-shimmer" />
+            </div>
+          </div>
+
+          <div className="fp-skeleton-input fp-shimmer" />
+
+          <div className="fp-skeleton-or">
+            <span />
+            <div className="fp-skeleton-line fp-or-label fp-shimmer" />
+            <span />
+          </div>
+
+          <div className="fakepay-skeleton-option">
+            <div className="fp-skeleton-radio fp-shimmer" />
+            <div className="fakepay-skeleton-copy">
+              <div className="fp-skeleton-line fp-option-title fp-shimmer" />
+              <div className="fp-skeleton-line fp-long fp-shimmer" />
+              <div className="fp-skeleton-line fp-medium fp-shimmer" />
+            </div>
+          </div>
+        </div>
+
+        {/* Pay button */}
+        <div className="fp-skeleton-button fp-shimmer" />
+      </div>
+
+      <div className="fakepay-secure-footer">
+        <div className="fp-skeleton-footer-icon fp-shimmer" />
+        <div className="fp-skeleton-line fp-footer-text fp-shimmer" />
+      </div>
+    </div>
+  );
+}
+
 export default function FakePayment() {
   const navigate = useNavigate();
   const [params] = useSearchParams();
@@ -39,7 +125,7 @@ export default function FakePayment() {
     }, 2200);
   };
 
-  if (!orderData) return <div className="fakepay-loading">Loading secure checkout...</div>;
+if (!orderData) return <FakePaymentSkeleton />;
 
   const items = orderData.items || [];
   const itemTotal = items.reduce((acc, item) => acc + (item.price * item.qty), 0);

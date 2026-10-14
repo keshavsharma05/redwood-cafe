@@ -312,6 +312,256 @@
   margin-bottom: 20px;
 }
 
+/* =========================================
+   PREMIUM PAYMENT SKELETON
+   ========================================= */
+
+.fakepay-skeleton {
+  --fp-base: #eee9df;
+  --fp-border: rgba(44, 31, 20, 0.07);
+}
+
+.fakepay-skeleton .fakepay-single-card {
+  animation: fp-appear 0.3s ease both;
+}
+
+.fp-shimmer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: var(--fp-base);
+}
+
+.fp-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    100deg,
+    transparent 15%,
+    rgba(255, 255, 255, 0.3) 30%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(220, 228, 207, 0.35) 65%,
+    transparent 85%
+  );
+  animation: fp-shimmer 1.6s ease-in-out infinite;
+}
+
+.fp-skeleton-line {
+  display: block;
+  height: 12px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.fakepay-skeleton-amount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.fp-skeleton-line.fp-label {
+  width: 100px;
+  height: 11px;
+}
+
+.fp-skeleton-line.fp-amount {
+  width: 155px;
+  height: 39px;
+  border-radius: 7px;
+}
+
+.fakepay-skeleton .fakepay-tree-divider {
+  margin-bottom: 32px;
+}
+
+.fp-skeleton-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.fakepay-skeleton-gateway {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.fp-skeleton-line.fp-gateway-title {
+  width: 165px;
+  height: 12px;
+}
+
+.fp-skeleton-badge {
+  width: 105px;
+  height: 23px;
+  border-radius: 12px;
+}
+
+.fakepay-skeleton-accordion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 1px solid var(--fp-border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.fakepay-skeleton-copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fakepay-skeleton-copy .fp-skeleton-line {
+  width: 120px;
+  height: 12px;
+}
+
+.fakepay-skeleton-copy .fp-skeleton-line.fp-short {
+  width: 175px;
+  max-width: 90%;
+  height: 10px;
+}
+
+.fp-skeleton-chevron {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.fakepay-skeleton-options {
+  background-color: #faf9f6;
+  border: 1px solid var(--fp-border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.fakepay-skeleton-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.fp-skeleton-radio {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.fakepay-skeleton-copy .fp-skeleton-line.fp-option-title {
+  width: 145px;
+}
+
+.fakepay-skeleton-copy .fp-skeleton-line.fp-long {
+  width: 100%;
+  max-width: 260px;
+  height: 10px;
+}
+
+.fakepay-skeleton-copy .fp-skeleton-line.fp-medium {
+  width: 70%;
+  max-width: 190px;
+  height: 10px;
+}
+
+.fp-skeleton-input {
+  height: 42px;
+  border-radius: 6px;
+  margin: 16px 0 0 28px;
+  width: calc(100% - 28px);
+}
+
+.fp-skeleton-or {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  padding-left: 28px;
+}
+
+.fp-skeleton-or > span {
+  flex: 1;
+  height: 1px;
+  background-color: var(--fp-border);
+}
+
+.fp-skeleton-line.fp-or-label {
+  width: 18px;
+  height: 9px;
+  flex-shrink: 0;
+}
+
+.fp-skeleton-button {
+  width: 100%;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.fakepay-skeleton .fakepay-secure-footer {
+  gap: 8px;
+}
+
+.fp-skeleton-footer-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  border-radius: 4px;
+}
+
+.fp-skeleton-line.fp-footer-text {
+  width: 225px;
+  max-width: 80%;
+  height: 10px;
+}
+
+@keyframes fp-shimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fp-appear {
+  from {
+    opacity: 0.65;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .fakepay-skeleton .fakepay-single-card {
+    padding: 32px 20px;
+  }
+
+  .fakepay-skeleton-options {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fakepay-skeleton *,
+  .fakepay-skeleton *::before,
+  .fakepay-skeleton *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
