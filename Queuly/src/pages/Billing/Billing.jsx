@@ -39,8 +39,9 @@ export default function Billing() {
   const [recipientPhone, setRecipientPhone] = useState("");
 
   const [showVerifyModal, setShowVerifyModal] = useState(false);
-  const [otpSent, setOtpSent] = useState(false);
-  const [otp, setOtp] = useState("");
+const [otpSent, setOtpSent] = useState(false);
+const [otp, setOtp] = useState("");
+const [demoOtp, setDemoOtp] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
 
 
@@ -515,10 +516,9 @@ export default function Billing() {
                       });
                       const data = await res.json();
                       if (res.ok && data.success) {
-                        setOtpSent(true); 
-                        setOtp(""); 
-                        window._currentOtp = data.data.demoOtp;
-                        alert(`[DEMO ONLY] Your OTP is: ${data.data.demoOtp}`);
+                        setOtpSent(true);
+                        setOtp("");
+                        setDemoOtp(String(data.data.demoOtp ?? ""));
                       } else {
                         alert(data.message || "Failed to request OTP");
                       }
@@ -533,30 +533,26 @@ export default function Billing() {
                 </>
               ) : (
   <>
+<div className="otp-demo-notice">
+  <span className="otp-demo-label">YOUR DEMO VERIFICATION CODE</span>
+
+  <div className="otp-demo-code">
+    <span>{demoOtp || "----"}</span>
+
     <button
       type="button"
-      className="otp-back-btn"
+      className="otp-copy-btn"
       onClick={() => {
-        setOtpSent(false);
-        setOtp("");
+        setOtp(demoOtp);
       }}
-      aria-label="Back to phone number"
-      title="Change phone number"
+      disabled={!demoOtp}
     >
-      <svg
-        width="21"
-        height="21"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M19 12H5" />
-        <path d="m12 19-7-7 7-7" />
-      </svg>
+      Use OTP
     </button>
+  </div>
+
+  <p>Enter this code below to verify your account.</p>
+</div>
 
     <div className="auth-input-group">
       <label>ENTER 4-DIGIT OTP</label>
