@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import API_BASE_URL from "../../config";
 import "./OrderHistory.css";
 import "../../components/AuthModal/AuthModal.css";
-import Preloader from "../../components/Preloader/Preloader";
 
 /* ── helpers ─────────────────────────────────────── */
 
