@@ -3,6 +3,113 @@ import { useLocation, useNavigate } from "react-router-dom";
 import API_BASE_URL from "../../config";
 import "./OrderStatus.css";
 
+function OrderStatusSkeleton() {
+  return (
+    <div
+      className="order-status-page status-skeleton"
+      aria-label="Loading order details"
+      aria-busy="true"
+    >
+      <div className="status-main-container">
+        {/* LEFT CARD: STATUS */}
+        <div className="status-left-card">
+          <div className="skeleton-header">
+            <div className="skeleton-circle skeleton-shimmer" />
+
+            <div className="skeleton-title-content">
+              <div className="skeleton-line skeleton-heading skeleton-shimmer" />
+              <div className="skeleton-line skeleton-shimmer" />
+              <div className="skeleton-line short skeleton-shimmer" />
+            </div>
+          </div>
+
+          <div className="skeleton-divider" />
+
+          <div className="skeleton-line section-title skeleton-shimmer" />
+
+          <div className="skeleton-stepper">
+            {[1, 2, 3, 4].map((step) => (
+              <React.Fragment key={step}>
+                <div className="skeleton-step">
+                  <div className="skeleton-step-icon skeleton-shimmer" />
+                  <div className="skeleton-line skeleton-step-label skeleton-shimmer" />
+                  <div className="skeleton-line skeleton-step-time skeleton-shimmer" />
+                </div>
+
+                {step < 4 && (
+                  <div className="skeleton-step-line skeleton-shimmer" />
+                )}
+              </React.Fragment>
+            ))}
+          </div>
+
+          <div className="skeleton-notification">
+            <div className="skeleton-circle small skeleton-shimmer" />
+            <div className="skeleton-title-content">
+              <div className="skeleton-line skeleton-shimmer" />
+              <div className="skeleton-line short skeleton-shimmer" />
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT CARD: ORDER DETAILS + DELIVERY */}
+        <div className="status-right-card">
+          <div className="order-details-pane">
+            <div className="skeleton-line section-title skeleton-shimmer" />
+
+            <div className="skeleton-table-header">
+              <div className="skeleton-line skeleton-shimmer" />
+              <div className="skeleton-line skeleton-shimmer" />
+              <div className="skeleton-line skeleton-shimmer" />
+            </div>
+
+            <div className="skeleton-items">
+              {[1, 2, 3].map((item) => (
+                <div className="skeleton-item-row" key={item}>
+                  <div className="skeleton-item-image skeleton-shimmer" />
+                  <div className="skeleton-item-name skeleton-shimmer" />
+                  <div className="skeleton-item-qty skeleton-shimmer" />
+                  <div className="skeleton-item-price skeleton-shimmer" />
+                </div>
+              ))}
+            </div>
+
+            <div className="skeleton-totals">
+              {[1, 2, 3].map((item) => (
+                <div className="skeleton-total-row" key={item}>
+                  <div className="skeleton-line skeleton-shimmer" />
+                  <div className="skeleton-line short skeleton-shimmer" />
+                </div>
+              ))}
+            </div>
+
+            <div className="skeleton-grand-total">
+              <div className="skeleton-line skeleton-shimmer" />
+              <div className="skeleton-line skeleton-grand-value skeleton-shimmer" />
+            </div>
+          </div>
+
+          <div className="delivery-info-pane">
+            <div className="skeleton-line section-title skeleton-shimmer" />
+
+            {[1, 2, 3, 4, 5].map((item) => (
+              <div className="skeleton-info-row" key={item}>
+                <div className="skeleton-info-icon skeleton-shimmer" />
+                <div className="skeleton-title-content">
+                  <div className="skeleton-line skeleton-shimmer" />
+                  <div className="skeleton-line short skeleton-shimmer" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="skeleton-footer skeleton-shimmer" />
+    </div>
+  );
+}
+
 export default function OrderStatus() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -77,14 +184,9 @@ export default function OrderStatus() {
     return 1; // Booked
   };
 
-  if (loading) {
-    return (
-      <div className="status-page-loader">
-        <div className="spinner-premium"></div>
-        <p>Loading your order details...</p>
-      </div>
-    );
-  }
+if (loading) {
+  return <OrderStatusSkeleton />;
+}
 
   if (error || !order) {
     return (
